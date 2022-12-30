@@ -12,6 +12,6 @@ package com.mycompany.bcdassignment;
 public class BCDAssignment {
 
     public static void main(String[] args) {
-        
+        System.out.println();
     }
 }
