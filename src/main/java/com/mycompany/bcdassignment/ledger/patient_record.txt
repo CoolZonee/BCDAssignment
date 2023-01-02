@@ -2,25 +2,43 @@
   {
     "header": {
       "index": 0,
-      "currHash": "3e54ec35ddb9a624ae73c14d634219567f8dcd6c519db3414b7e66d058eba034",
+      "currHash": "1f0c63224fac763bd145efb0bc5bcba3d21d8c372a01ebef3d6c97bdfb426954",
       "prevHash": "0",
-      "timestamp": 1672655706792
+      "timestamp": 1672678234184
     }
   },
   {
     "header": {
       "index": 1,
-      "currHash": "a69444b3e67cbe3b55156695a681969babffa8dc5cbfe1a4e1713c57156bf277",
-      "prevHash": "3e54ec35ddb9a624ae73c14d634219567f8dcd6c519db3414b7e66d058eba034",
-      "timestamp": 1672655706849
+      "currHash": "3b73e76f2342a4bcb4cf7d119b944282b38ec6601f36c485f98b61a78be9aa88",
+      "prevHash": "1f0c63224fac763bd145efb0bc5bcba3d21d8c372a01ebef3d6c97bdfb426954",
+      "timestamp": 1672678234406
     },
-    "patientRecord": {
+    "tranxRecord": {
       "merkleRoot": "9a247caf9fcc88f677d2b96e2f926672daddbeb9574d476b761d021ee36b4956",
-      "patientRecordList": [
-        "John|763111482174|03/03/1976|M|XADDRESS|Chinese|0182325423|0169836437",
-        "Debbie|863111482174|02/05/1986|F|XADDRESS|Indian|0122123423|0182342137",
-        "Ali|023111482174|03/03/1976|M|XADDRESS|Malay|0105625423|0169823437"
-      ]
+      "tranxList": [
+        "IY5R4apY5JBbstXEtILrmWGfwPGneZ/OYSoOARk5jbhCM/fTkJjwkcWkefonxaoF3heXc8xhTYkWTuJ2gfOx7Wq8RthT3usiSnVqK806n39a+++Rc+JmyZzOjyzDErAxfubnriSWVeXx6jJr6qTuhR/I4DaYDsSFmIBUym1nHaI\u003d",
+        "qsofP2YXse3Q8lF+vEElc4WX0K4SIZvZiTJcxYY5r3Ye3QhYbTV64XxWVdi3UGslpjZMwcu+X1bBxPxZsKKMamOHUHDKHgnYAYSOBiX6L1Qrg7j1LW5aFJoNgkikBgxhWFEDuNKFGRF6a43Ep0i3mfBtRvj9B7lEyZRLzDxeOq0\u003d",
+        "eUJmdqCsUjj/thuvkJvm5f8Z3TjUU0vLvE+NdrUzg8YOAQNU/cgTJjHmjseUO5NpnhmG23KcD56/UGMnJLCjpIAGA+KxIJzixrsfk9pq9uC8CQVNDRB4kc1eDWa57RrK0Vh546Z9eI4I0KKx/spzq84BVxgdh2dAVsAo2e+WOKw\u003d"
+      ],
+      "test": ""
+    }
+  },
+  {
+    "header": {
+      "index": 2,
+      "currHash": "ef73b318740ded0dc135f4509cbbc46a413a74e2be64c9c95ef1cdb345f56135",
+      "prevHash": "3b73e76f2342a4bcb4cf7d119b944282b38ec6601f36c485f98b61a78be9aa88",
+      "timestamp": 1672678236154
+    },
+    "tranxRecord": {
+      "merkleRoot": "9a247caf9fcc88f677d2b96e2f926672daddbeb9574d476b761d021ee36b4956",
+      "tranxList": [
+        "MlENB71UtCGe6y1e3BbTWHbDeON6GtRDoLnHxCZOX4kLJyr5xlpMFXUceA1Vsk1hgPHdEyE6dWw3X29fso1Z1IYNRT7kczMqKYxoOzOd0wwkd3L/vsw7yWEjWgg1f2cuZCtja/vFq9nk10lRB+Vgvq/dV9PkMuMY59SKCOJIiPc\u003d",
+        "gtkfu1+MM6sBjH6Q8anFB+OSZ82k6btihO+LiGaqiVf94pW6vhW1K8CwNzePkyCpNdEQtM8rM92EZJurRh88RrJ839swEges1yJCqpNdNH6hWT6DFza08y6wyY/K6ViBJd6Iyddmd4JWv11bjO5V9aKY17wZ7AUWV45mHtLHypE\u003d",
+        "Dv2leqPCCS62MWSEd3TFbXNFzS18WCn1dA4r8fVy49o3p2zAj7bS7hcjFQCox+lsA9lafJuQG0cZ4LJBoI9G7pDvelMec8ZEEju7mxTSfb+mTVQVjWlc46EFLive1HFufh0UhjqkY46oVPj9BgkKfSU1r3RNqXIos729Wz2GzkE\u003d"
+      ],
+      "test": ""
     }
   }
 ]

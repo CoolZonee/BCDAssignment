@@ -11,6 +11,8 @@ package com.mycompany.bcdassignment;
 public class Constant {
     public static final String MASTER_BINARY_DIR = "src/main/java/com/mycompany/bcdassignment/master";
     public static final String MASTER_LEDGER_DIR = "src/main/java/com/mycompany/bcdassignment/ledger";
+    public static final String PUBLIC_KEY_PATH = "src/main/java/com/mycompany/bcdassignment/Cryptography/public_key";
+    public static final String PRIVATE_KEY_PATH = "src/main/java/com/mycompany/bcdassignment/Cryptography/private_key";
     
     public static final String PATIENT_RECORD = "patient_record";
     public static final String HEALTH_RECORD = "health_record";

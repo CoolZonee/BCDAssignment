@@ -48,7 +48,7 @@ public class BCDAssignment {
         String prevHash = bc.get().getLast().getHeader().getCurrHash();
 
         Block newBlock = new Block(prevHash);
-        newBlock.setPatientRecord(tranxs);
+        newBlock.setTranxRecord(tranxs);
 
         bc.nextBlock(newBlock);
         bc.distribute();
