@@ -22,9 +22,9 @@ public class BCDAssignment {
 
     public static void main(String[] args) {
         String[] arr = {
-                    "John|763111482174|03/03/1976|M|XADDRESS|Chinese|0182325423|0169836437",
-                    "Debbie|863111482174|02/05/1986|F|XADDRESS|Indian|0122123423|0182342137",
-                    "Ali|023111482174|03/03/1976|M|XADDRESS|Malay|0105625423|0169823437",
+            "John,763111482174,03/03/1976,M,XADDRESS,Chinese,0182325423,0169836437",
+            "Debbie,863111482174,02/05/1986,F,XADDRESS,Indian,0122123423,0182342137",
+            "Ali,023111482174,03/03/1976,M,XADDRESS,Malay,0105625423,0169823437"
         };
         
         addNewBlock(Arrays.asList(arr), PATIENT_RECORD);

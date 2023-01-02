@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class TransactionCollection implements Serializable {
     public static final int SIZE = 10;
@@ -55,6 +56,8 @@ public class TransactionCollection implements Serializable {
             }
         } else {
             KPKeyPair.create();
+            KPKeyPair.put(KPKeyPair.getPublicKey().getEncoded(), Constant.PUBLIC_KEY_PATH);
+            KPKeyPair.put(KPKeyPair.getPrivateKey().getEncoded(), Constant.PRIVATE_KEY_PATH);
         }
         Asymmetric asym = new Asymmetric();
         return asym.encrypt(input, KPKeyPair.getPublicKey());
@@ -69,8 +72,6 @@ public class TransactionCollection implements Serializable {
                 } catch (IOException ex) {
                     Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                KPKeyPair.create();
             }
             Asymmetric asym = new Asymmetric();
             return asym.decrypt(input, KPKeyPair.getPrivateKey());
@@ -78,6 +79,15 @@ public class TransactionCollection implements Serializable {
             Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
+    }
+    
+    public List<String> getDecryptedData () {
+        return tranxList
+                .stream()
+                .map(e ->
+                    decryptData(e)                        
+                )
+                .collect(Collectors.toList());
     }
 
     @Override
