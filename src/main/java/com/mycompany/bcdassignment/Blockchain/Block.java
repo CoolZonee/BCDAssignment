@@ -23,15 +23,15 @@ public class Block implements Serializable {
         return header;
     }
 
-    public TransactionCollection patientRecord;
+    public TransactionCollection tranxRecord;
 
-    public  void setPatientRecord(TransactionCollection patientRecord) {
-        this.patientRecord = patientRecord;
+    public void setTranxRecord(TransactionCollection tranxRecord) {
+        this.tranxRecord = tranxRecord;
     }
-
+    
     @Override
     public String toString() {
-        return "Block [body=" + patientRecord + ", header=" + header + "]";
+        return "Block [body=" + tranxRecord + ", header=" + header + "]";
     }
 
     public Block (String previousHash) {
@@ -42,8 +42,6 @@ public class Block implements Serializable {
         String info = String.join("+", Integer.toString(header.getIndex()), Long.toString(header.getTimestamp()), header.getPrevHash());
         String blockHash = Hasher.sha256(info);
         header.setCurrHash(blockHash);
-
-
     }
 
     private byte[] getBytes() {

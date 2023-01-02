@@ -2,24 +2,24 @@
   {
     "header": {
       "index": 0,
-      "currHash": "3e54ec35ddb9a624ae73c14d634219567f8dcd6c519db3414b7e66d058eba034",
+      "currHash": "6952fd70d850203180d48f1e6b15f514bf4a4832e3106d108ea2fa2e4d8eca30",
       "prevHash": "0",
-      "timestamp": 1672655706792
+      "timestamp": 1672691409767
     }
   },
   {
     "header": {
       "index": 1,
-      "currHash": "a69444b3e67cbe3b55156695a681969babffa8dc5cbfe1a4e1713c57156bf277",
-      "prevHash": "3e54ec35ddb9a624ae73c14d634219567f8dcd6c519db3414b7e66d058eba034",
-      "timestamp": 1672655706849
+      "currHash": "d9f4a6f9c6c4018b4219bfce4de1677016380cb786e76bc1d65219f1cfca91ea",
+      "prevHash": "6952fd70d850203180d48f1e6b15f514bf4a4832e3106d108ea2fa2e4d8eca30",
+      "timestamp": 1672691409847
     },
-    "patientRecord": {
-      "merkleRoot": "9a247caf9fcc88f677d2b96e2f926672daddbeb9574d476b761d021ee36b4956",
-      "patientRecordList": [
-        "John|763111482174|03/03/1976|M|XADDRESS|Chinese|0182325423|0169836437",
-        "Debbie|863111482174|02/05/1986|F|XADDRESS|Indian|0122123423|0182342137",
-        "Ali|023111482174|03/03/1976|M|XADDRESS|Malay|0105625423|0169823437"
+    "tranxRecord": {
+      "merkleRoot": "95f02e1c3f073d2eb8c55be5ff598150062a8e8d95ffeff85a18698451187461",
+      "tranxList": [
+        "fvAaEoyKjuO2OLkcdSjbpU8mDtbpF224faJp44Af8TtG3mz8k4eI4ApR862BDtrDgoDNnPRr9c/w//XFUSbQG15ygYHV0AW05E9NUQ0d5gjwbBZ61L5kUlmnv79E4r1qlrTHM/T0dH+RnNZz/JX9uRXqnlZDWDFIAL7YfQH6ViY\u003d",
+        "ARxvOrTD1BO+UUjMEOzN+tF1IsZM6AocH0zkXSjFOXVtM7ukz65/vPsisZQcmnFOdfPIpNNWO76MEySISAzYhqp6fW588JMFo4KZz02hAmhOPioV10BEj0WBr6HMxZQzSGYjImBhat7exLvc0HfTzxFXn5ork0/vv+XkbONKUuM\u003d",
+        "EHHVTUX+xc6YV+1WkHu+hJtqLrluYog2xl6m0h8SyoOiAonJF6cyAzb+cSOvoDV+8C7XrvT3Pl0BXgVBjepvbkU3dUC4v8xsRkTpHOHZ25XprfxIEQ2M3Uvv+zCvA/PZ+jajuB8oIOvqIE6KR2dDYhX8X8MFApvYNU+kftuLUNw\u003d"
       ]
     }
   }

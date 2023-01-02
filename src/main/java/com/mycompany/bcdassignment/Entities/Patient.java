@@ -10,13 +10,13 @@ package com.mycompany.bcdassignment.Entities;
  */
 public class Patient {
     private String patientName;
-    private int IC;
+    private String IC;
     private String dob;
     private char gender;
     private String address;
     private String ethnicity;
-    private int contactDetail;
-    private int emergencyContact;
+    private String contactDetail;
+    private String emergencyContact;
     public static String[] confidential = {
         "dob",
         "gender",
@@ -26,7 +26,7 @@ public class Patient {
         "emergencyContact",
     };
 
-    public Patient(String patientName, int IC, String dob, char gender, String address, String ethnicity, int contactDetail, int emergenyContact) {
+    public Patient(String patientName, String IC, String dob, char gender, String address, String ethnicity, String contactDetail, String emergenyContact) {
         this.patientName = patientName;
         this.IC = IC;
         this.dob = dob;
@@ -41,7 +41,7 @@ public class Patient {
         return patientName;
     }
 
-    public int getIC() {
+    public String getIC() {
         return IC;
     }
 
@@ -61,11 +61,11 @@ public class Patient {
         return ethnicity;
     }
 
-    public int getContactDetail() {
+    public String getContactDetail() {
         return contactDetail;
     }
 
-    public int getEmergenyContact() {
+    public String getEmergenyContact() {
         return emergencyContact;
     }
 
@@ -73,7 +73,7 @@ public class Patient {
         this.patientName = patientName;
     }
 
-    public void setIC(int IC) {
+    public void setIC(String IC) {
         this.IC = IC;
     }
 
@@ -93,11 +93,11 @@ public class Patient {
         this.ethnicity = ethnicity;
     }
 
-    public void setContactDetail(int contactDetail) {
+    public void setContactDetail(String contactDetail) {
         this.contactDetail = contactDetail;
     }
 
-    public void setEmergenyContact(int emergenyContact) {
+    public void setEmergenyContact(String emergenyContact) {
         this.emergencyContact = emergenyContact;
     }
 
