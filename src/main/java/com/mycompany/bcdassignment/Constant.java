@@ -16,4 +16,6 @@ public class Constant {
     public static final String HEALTH_RECORD = "health_record";
     public static final String MEDICAL_APPOINTMENT = "medical_appoinment";
     public static final String PAYMENT_RECORD = "payment_record";
+    
+    public static final String ENCRYPTION_ALG = "RSA";
 }
