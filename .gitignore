@@ -9,3 +9,7 @@ nbactions.xml
 nb-configuration.xml
 /target/
 /.idea
+
+# blockchain data
+src/main/java/com/mycompany/bcdassignment/ledger/*
+src/main/java/com/mycompany/bcdassignment/master/*
