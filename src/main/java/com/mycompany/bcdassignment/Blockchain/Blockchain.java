@@ -18,7 +18,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 
 public class Blockchain {
-    private static LinkedList<Block> db = new LinkedList<>();
+    private static LinkedList<Block> chain = new LinkedList<>();
+    private final String ledgerFileName, chainFileName;
 
     // Singleton pattern
     private static Blockchain _instance;
@@ -29,7 +30,6 @@ public class Blockchain {
         return _instance;
     }
 
-    private final String ledgerFileName, chainFileName;
     private Blockchain (String moduleName) {
         this.chainFileName = Constant.MASTER_BINARY_DIR + "/" + moduleName + ".bin";
         this.ledgerFileName = Constant.MASTER_LEDGER_DIR + "/" + moduleName + ".txt";
@@ -40,8 +40,8 @@ public class Blockchain {
      * genesis()
      */
     public void genesis() {
-        Block genesis = new Block("0");
-        db.add(genesis);
+        Block genesis = new Block("0", "");
+        chain.add(genesis);
         // persist to the binary file
         persist();
         // show ledger
@@ -53,9 +53,9 @@ public class Blockchain {
      */
     public void nextBlock(Block newBlock) {
         // obtain existing blockchain binary
-        db = get();
-        newBlock.getHeader().setIndex(db.getLast().getHeader().getIndex() + 1);
-        db.add(newBlock);
+        chain = get();
+        newBlock.getHeader().setIndex(chain.getLast().getHeader().getIndex() + 1);
+        chain.add(newBlock);
         // persist to the binary file
         persist();
     }
@@ -84,7 +84,7 @@ public class Blockchain {
                 FileOutputStream fos = new FileOutputStream(this.chainFileName);
                 ObjectOutputStream out = new ObjectOutputStream(fos)
         ) {
-            out.writeObject(db);
+            out.writeObject(chain);
             System.out.println(this.chainFileName + " file is updated!");
         }
         catch (Exception e) {
@@ -98,7 +98,7 @@ public class Blockchain {
     public void distribute() {
         // convert the chain to String using gson api
         try {
-            String chain = new GsonBuilder().setPrettyPrinting().create().toJson(db);
+            String chain = new GsonBuilder().setPrettyPrinting().create().toJson(Blockchain.chain);
             System.out.println(chain);
 
             // write to file

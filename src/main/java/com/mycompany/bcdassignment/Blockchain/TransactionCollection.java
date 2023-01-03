@@ -13,8 +13,10 @@ import com.mycompany.bcdassignment.Constant;
 import com.mycompany.bcdassignment.Cryptography.Asymmetric;
 import com.mycompany.bcdassignment.Cryptography.KPKeyPair;
 import java.io.IOException;
+import java.io.Serial;
 import java.io.Serializable;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,34 +25,25 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class TransactionCollection implements Serializable {
-    public static final int SIZE = 10;
 
-    public String merkleRoot = "";
-
+    @Serial
+    private static final long serialVersionUID = 3526685098573657690L;
     public List<String> tranxList;
 
-    public TransactionCollection() {
-        this.tranxList = new ArrayList<>(SIZE);
-    }
-
-    public TransactionCollection(String merkleRoot, List<String> tranxList) {
-        this.merkleRoot = merkleRoot;
-        this.tranxList = tranxList;
+    public TransactionCollection(List<String> tranxList) {
+        this.tranxList = tranxList.stream().map(this::encryptData).toList();
     }
 
     public void add (String record) {
         tranxList.add(encryptData(record));
     }
 
-    public void setMerkleRoot(String merkleRoot) {
-        this.merkleRoot = merkleRoot;
-    }
-    
     private String encryptData (String input) {
         // encrypt the record
-        if (Files.exists(Paths.get(Constant.PUBLIC_KEY_PATH))) {
+        Path path = Paths.get(Constant.PUBLIC_KEY_PATH);
+        if (Files.exists(path)) {
             try {
-                KPKeyPair.setPublicKey(Files.readAllBytes(Paths.get(Constant.PUBLIC_KEY_PATH)));
+                KPKeyPair.setPublicKey(Files.readAllBytes(path));
             } catch (IOException ex) {
                 Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -66,9 +59,10 @@ public class TransactionCollection implements Serializable {
     private String decryptData (String input) {
         try {
             // decrypt the record
-            if (Files.exists(Paths.get(Constant.PRIVATE_KEY_PATH))) {
+            Path path = Paths.get(Constant.PRIVATE_KEY_PATH);
+            if (Files.exists(path)) {
                 try {
-                    KPKeyPair.setPrivateKey(Files.readAllBytes(Paths.get(Constant.PRIVATE_KEY_PATH)));
+                    KPKeyPair.setPrivateKey(Files.readAllBytes(path));
                 } catch (IOException ex) {
                     Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -84,17 +78,14 @@ public class TransactionCollection implements Serializable {
     public List<String> getDecryptedData () {
         return tranxList
                 .stream()
-                .map(e ->
-                    decryptData(e)                        
-                )
+                .map(this::decryptData)
                 .collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
         return "TransactionRecords {" +
-                "merkleRoot='" + merkleRoot + '\'' +
-                ", records=" + tranxList +
+                "records=" + tranxList +
                 '}';
     }
 

@@ -12,15 +12,28 @@ package com.mycompany.bcdassignment.Blockchain;
 import com.mycompany.bcdassignment.Hashing.Hasher;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class Block implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 6529685098267757690L;
     public Header header;
 
     public Header getHeader() {
         return header;
+    }
+
+    public Block (String previousHash, String merkleRoot) {
+        header = new Header();
+        header.setPrevHash(previousHash);
+        header.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
+        header.setMerkleRoot(merkleRoot);
+        String info = String.join("+", Integer.toString(header.getIndex()), Long.toString(header.getTimestamp()), header.getPrevHash());
+        String blockHash = Hasher.sha256(info);
+        header.setCurrHash(blockHash);
     }
 
     public TransactionCollection tranxRecord;
@@ -32,16 +45,6 @@ public class Block implements Serializable {
     @Override
     public String toString() {
         return "Block [body=" + tranxRecord + ", header=" + header + "]";
-    }
-
-    public Block (String previousHash) {
-        header = new Header();
-        header.setPrevHash(previousHash);
-        header.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
-
-        String info = String.join("+", Integer.toString(header.getIndex()), Long.toString(header.getTimestamp()), header.getPrevHash());
-        String blockHash = Hasher.sha256(info);
-        header.setCurrHash(blockHash);
     }
 
     private byte[] getBytes() {
@@ -59,9 +62,13 @@ public class Block implements Serializable {
     }
 
     public static class Header implements Serializable {
+        @Serial
+        private static final long serialVersionUID = 637568598567015690L;
+
         private int index;
         private String currHash, prevHash;
         private long timestamp;
+        private String merkleRoot;
 
         public int getIndex() {
             return index;
@@ -94,11 +101,20 @@ public class Block implements Serializable {
         public void setTimestamp(long timestamp) {
             this.timestamp = timestamp;
         }
+        
+        public String getMerkleRoot() {
+            return merkleRoot;
+        }
+        
+        public void setMerkleRoot(String merkleRoot) {
+            this.merkleRoot = merkleRoot;
+        }
 
         @Override
         public String toString() {
             return "Header{" +
                     "index=" + index +
+                    ", merkleRoot='" + merkleRoot+ '\'' +
                     ", currHash='" + currHash + '\'' +
                     ", prevHash='" + prevHash + '\'' +
                     ", timestamp=" + timestamp +

@@ -20,21 +20,10 @@ public class Test {
         Blockchain bc = Blockchain.getInstance(Constant.PATIENT_RECORD);
         LinkedList<Block> list = bc.get();
         List<Patient> patientList = new ArrayList<>();
+        System.out.println(list.size());
         list.forEach(e -> {
             if(e.tranxRecord != null) {
-                e.tranxRecord.getDecryptedData().forEach(line -> {
-                    String[] details = line.split(",");
-                    patientList.add(new Patient(
-                            details[0], 
-                            details[1],
-                            details[2],
-                            details[3].charAt(0),
-                            details[4],
-                            details[5],
-                            details[6],
-                            details[7]
-                    ));
-                });
+                e.tranxRecord.getDecryptedData().forEach(System.out::println);
             }
         });
         

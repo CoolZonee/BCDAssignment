@@ -38,7 +38,7 @@ public class MerkleTree {
     private static MerkleTree instance;
     public static MerkleTree getInstance( List<String> tranxLst ) {
         if( instance == null ) {
-            return new MerkleTree(tranxLst);
+            instance = new MerkleTree(tranxLst);
         }
         return instance;
     }
@@ -69,10 +69,12 @@ public class MerkleTree {
             String left = tranxLst.get(i);
             i++;
             String right = "";
-            if( i != tranxLst.size() ) right = tranxLst.get(i);
+            if(i != tranxLst.size()) {
+                right = tranxLst.get(i);
+                i++;
+            }
             String hash = Hasher.sha256(left.concat(right));
             hashLst.add(hash);
-            i++;
         }
         return hashLst;
     }
