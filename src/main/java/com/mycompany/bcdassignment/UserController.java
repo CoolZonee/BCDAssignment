@@ -2,9 +2,12 @@ package com.mycompany.bcdassignment;
 
 import com.mycompany.bcdassignment.Entities.User;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,5 +50,29 @@ public class UserController {
             throw new RuntimeException(e);
         }
         userList = users;
+    }
+
+    public void addUser(User user) throws Exception {
+        userList = getUserList();
+        if (userList.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()))) {
+            throw new Exception ("Username existed!");
+        } else {
+            userList.add(user);
+            put();
+        }
+    }
+
+    public void put()  {
+        StringBuilder input = new StringBuilder();
+
+        for(User user: userList) {
+            input.append(user.toString()).append("\n");
+        }
+
+        try {
+            Files.writeString(Paths.get(Constant.USER_TEXT_PATH), input, StandardCharsets.UTF_8, StandardOpenOption.CREATE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

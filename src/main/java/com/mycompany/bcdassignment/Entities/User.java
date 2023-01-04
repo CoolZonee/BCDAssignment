@@ -95,15 +95,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "UUID='" + UUID + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", email='" + email + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", role='" + role + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return UUID + ',' +
+               name + ',' +
+                gender + ',' +
+                email + ',' +
+                contactNumber + ',' +
+                role + ',' +
+                username + ',' +
+                password;
     }
 }

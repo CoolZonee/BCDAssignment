@@ -4,6 +4,13 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Entities.User;
+import com.mycompany.bcdassignment.Hashing.Hasher;
+import com.mycompany.bcdassignment.UserController;
+
+import javax.swing.*;
+import java.util.UUID;
+
 /**
  *
  * @author User
@@ -76,6 +83,11 @@ public class RegisterNewStaff extends javax.swing.JFrame {
         btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         btnReset.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnReset.setText("Reset");
@@ -242,45 +254,40 @@ public class RegisterNewStaff extends javax.swing.JFrame {
     
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        LoginPage lp = new LoginPage();
+        new LoginPage().setVisible(true);
         this.setVisible(false);
-        lp.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+        if (
+                txtName.getText().equals("") ||
+                txtEmail.getText().equals("") ||
+                txtContactNo.getText().equals("") ||
+                txtUsername.getText().equals("") ||
+                txtPassword.getText().equals("")
+        ) {
+            JOptionPane.showMessageDialog(null, "One or more fields are empty!",
+                    "Empty Fields", JOptionPane.ERROR_MESSAGE);
+        } else {
+            UserController uc = UserController.getInstance();
+            try {
+                uc.addUser(new User(
+                        UUID.randomUUID().toString(),
+                        txtName.getText(),
+                        cmbBoxGender.getSelectedItem().toString().charAt(0),
+                        txtEmail.getText(),
+                        txtContactNo.getText(),
+                        cmbBoxRole.getSelectedItem().toString(),
+                        txtUsername.getText(),
+                        Hasher.sha256(txtPassword.getText())
+                ));
+                JOptionPane.showMessageDialog(null, "Register Successful",
+                        "Successful", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterNewStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegisterNewStaff().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
