@@ -47,7 +47,7 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         txtTime = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TxtLabTestRes = new javax.swing.JTextArea();
+        txtLabTestRes = new javax.swing.JTextArea();
         txtDate = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -58,6 +58,7 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         txtReason = new javax.swing.JTextArea();
         jLabel12 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
+        btnSubmit1 = new javax.swing.JButton();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -103,9 +104,9 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         jLabel2.setAlignmentX(0.5F);
         jLabel2.setMaximumSize(new java.awt.Dimension(500, 50));
 
-        TxtLabTestRes.setColumns(20);
-        TxtLabTestRes.setRows(5);
-        jScrollPane1.setViewportView(TxtLabTestRes);
+        txtLabTestRes.setColumns(20);
+        txtLabTestRes.setRows(5);
+        jScrollPane1.setViewportView(txtLabTestRes);
 
         btnBack.setBackground(new java.awt.Color(204, 204, 204));
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
@@ -130,6 +131,15 @@ public class CreateMedicalReport extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Patient Name:");
+
+        btnSubmit1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnSubmit1.setText("Reset");
+        btnSubmit1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnSubmit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmit1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,16 +190,18 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                                 .addGap(17, 17, 17)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(64, 64, 64)
-                                        .addComponent(txtInpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel11)
                                         .addGap(58, 58, 58)
-                                        .addComponent(txtSign, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtSign, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel9)
+                                            .addGap(64, 64, 64)
+                                            .addComponent(txtInpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -247,9 +259,11 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtSign, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,6 +287,25 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         pd.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSubmit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit1ActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+    }//GEN-LAST:event_btnSubmit1ActionPerformed
+
+    public void clearFields() {
+        txtName.setText("");
+        txtId.setText("");
+        txtDoc.setText("");
+        txtDate.setText("");
+        txtTime.setText("");
+        txtReason.setText("");
+        txtDiagnosis.setText("");
+        txtTreatment.setText("");
+        txtMed.setText("");
+        txtLabTestRes.setText("");
+        txtInpatient.setText("");
+        txtSign.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -312,9 +345,9 @@ public class CreateMedicalReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea TxtLabTestRes;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnSubmit1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -338,6 +371,7 @@ public class CreateMedicalReport extends javax.swing.JFrame {
     private javax.swing.JTextField txtDoc;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtInpatient;
+    private javax.swing.JTextArea txtLabTestRes;
     private javax.swing.JTextField txtMed;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextArea txtReason;

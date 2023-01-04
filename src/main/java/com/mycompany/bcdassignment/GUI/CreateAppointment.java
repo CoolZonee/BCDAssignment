@@ -47,7 +47,7 @@ public class CreateAppointment extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel2.setText("View Appointment Details");
+        jLabel2.setText("Create New Appointment");
         jLabel2.setToolTipText("");
         jLabel2.setAlignmentX(0.5F);
         jLabel2.setMaximumSize(new java.awt.Dimension(500, 50));
@@ -79,6 +79,7 @@ public class CreateAppointment extends javax.swing.JFrame {
 
         btnSubmit.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
         btnSubmit.setText("Submit");
+        btnSubmit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txtReason.setColumns(20);
         txtReason.setRows(5);
@@ -93,7 +94,7 @@ public class CreateAppointment extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnBack)
-                        .addGap(50, 50, 50)
+                        .addGap(69, 69, 69)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(78, 78, 78)
@@ -114,16 +115,15 @@ public class CreateAppointment extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(167, 167, 167)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnSubmit)
-                                .addGap(162, 162, 162)))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -152,8 +152,8 @@ public class CreateAppointment extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnSubmit)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

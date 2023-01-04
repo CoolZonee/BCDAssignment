@@ -266,6 +266,7 @@ public class CreateHealthRecord extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnResetActionPerformed
 
     /**
