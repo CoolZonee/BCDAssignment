@@ -8,6 +8,7 @@ import com.mycompany.bcdassignment.Blockchain.Block;
 import com.mycompany.bcdassignment.Blockchain.Blockchain;
 import com.mycompany.bcdassignment.Constant;
 import com.mycompany.bcdassignment.Entities.Patient;
+import com.mycompany.bcdassignment.Main;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -507,8 +508,13 @@ public class PatientDetails extends javax.swing.JFrame {
 
     private void btnCreateMedRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateMedRepActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new CreateMedicalReport(patientList.get(currentIndex).getUUID()).setVisible(true);
+        if(Main.currentUser.getRole().equals(Constant.DOCTOR)) {
+            this.setVisible(false);
+            new CreateMedicalReport(patientList.get(currentIndex).getUUID()).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Only doctor is allowed to enter this page!",
+                    "Access Denied", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCreateMedRepActionPerformed
 
     private void btnViewMedRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewMedRepActionPerformed
@@ -548,13 +554,6 @@ public class PatientDetails extends javax.swing.JFrame {
         txtContact.setText(patientList.get(currentIndex).getContactDetail());
     }
 
-    public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PatientDetails().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreateAppoint;
