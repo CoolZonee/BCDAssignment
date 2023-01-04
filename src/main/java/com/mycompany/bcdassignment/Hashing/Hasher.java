@@ -4,8 +4,9 @@
  */
 package com.mycompany.bcdassignment.Hashing;
 
-import java.security.*;
+import java.security.MessageDigest;
 
+import com.mycompany.bcdassignment.Constant;
 import org.apache.commons.codec.binary.Hex;
 /**
  *
@@ -26,7 +27,7 @@ public class Hasher {
             md = MessageDigest.getInstance(algo);
 
             // adding security value using salt
-            byte[] salt = "H=3?xk+HseFQ".getBytes();
+            byte[] salt = Constant.SALT.getBytes();
             md.update(salt);
 
             // fetch input to md

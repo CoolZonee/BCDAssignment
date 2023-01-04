@@ -39,7 +39,7 @@ public class KPKeyPair {
 
     public KPKeyPair() {
         try {
-            keygen = KeyPairGenerator.getInstance(Constant.ENCRYPTION_ALG);
+            keygen = KeyPairGenerator.getInstance(Constant.CIPHER_ALG);
             keygen.initialize(1024);
         }
         catch (Exception e) {
@@ -59,7 +59,7 @@ public class KPKeyPair {
     
     public static void setPublicKey(byte[] publicKeyBytes) {
         try {
-            KeyFactory kf = KeyFactory.getInstance(Constant.ENCRYPTION_ALG);
+            KeyFactory kf = KeyFactory.getInstance(Constant.CIPHER_ALG);
             publicKey = kf.generatePublic(new X509EncodedKeySpec(publicKeyBytes));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
@@ -68,7 +68,7 @@ public class KPKeyPair {
 
     public static void setPrivateKey(byte[] privateKeyBytes) {
         try {
-            KeyFactory kf = KeyFactory.getInstance(Constant.ENCRYPTION_ALG);
+            KeyFactory kf = KeyFactory.getInstance(Constant.CIPHER_ALG);
             privateKey = kf.generatePrivate(new PKCS8EncodedKeySpec(privateKeyBytes));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);

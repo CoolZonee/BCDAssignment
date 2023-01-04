@@ -9,11 +9,11 @@ import com.mycompany.bcdassignment.Blockchain.Block;
 import com.mycompany.bcdassignment.Blockchain.Blockchain;
 import com.mycompany.bcdassignment.Blockchain.MerkleTree;
 import com.mycompany.bcdassignment.Blockchain.TransactionCollection;
-import com.mycompany.bcdassignment.GUI.LoginPage;
 import static com.mycompany.bcdassignment.Constant.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -22,52 +22,20 @@ import java.util.List;
 public class BCDAssignment {
 
     public static void main(String[] args) {
-//<<<<<<< Updated upstream
-//        String[] arr = {
-//            "John,763111482174,03/03/1976,M,XADDRESS,Chinese,0182325423,0169836437",
-//            "Debbie,863111482174,02/05/1986,F,XADDRESS,Indian,0122123423,0182342137",
-//            "Ali,023111482174,03/03/1976,M,XADDRESS,Malay,0105625423,0169823437"
-//        };
-//        
-//        addNewBlock(Arrays.asList(arr), PATIENT_RECORD);
-//=======
-//        String[] arr = {
-//                    "John|763111482174|03/03/1976|M|XADDRESS|Chinese|0182325423|0169836437",
-//                    "Debbie|863111482174|02/05/1986|F|XADDRESS|Indian|0122123423|0182342137",
-//                    "Ali|023111482174|03/03/1976|M|XADDRESS|Malay|0105625423|0169823437",
-//        };
-//        
-//        addNewBlock(Arrays.asList(arr), PATIENT_RECORD);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                LoginPage lp = new LoginPage();
-                lp.setVisible(true);
-           }
-        });
-//>>>>>>> Stashed changes
-    }
-    
-    static void addNewBlock(List<String> arr, String moduleName) {
-        Blockchain bc = Blockchain.getInstance(moduleName);
+        // Patient Record
+//        String patientUUID = UUID.randomUUID().toString();
+        String healthRecordUUID = UUID.randomUUID().toString();
+//        String[] arr = {"John","763111482174","03/03/1976","M","XADDRESS","Chinese","0182325423","0169836437"};
+//        String[] patient = {patientUUID, "Debbie", "863111482174","02/05/1986", "F", "XADDRESS", "Indian", "0122123423", "0182342137"};
 
-        if (!(new File(MASTER_BINARY_DIR).exists())) {
-            new File(MASTER_BINARY_DIR).mkdir();
-            new File(MASTER_LEDGER_DIR).mkdir();
-            bc.genesis();
-        }
-        TransactionCollection tranxs = new TransactionCollection();
-        arr.forEach(tranxs::add);
-        MerkleTree mt = MerkleTree.getInstance(arr);
-        mt.build();
+        // Health Record
+        String[] health = {healthRecordUUID, "e8c55db5-2c1b-4962-8b69-d334a91a4d34", "170", "50.5", "A+", "allergies", "immunization", "familyhealthhistory"};
 
-        tranxs.setMerkleRoot(mt.getRoot());
 
-        String prevHash = bc.get().getLast().getHeader().getCurrHash();
+//        Blockchain patientBc = new Blockchain(PATIENT_RECORD);
+        Blockchain healthBc = new Blockchain(HEALTH_RECORD);
 
-        Block newBlock = new Block(prevHash);
-        newBlock.setTranxRecord(tranxs);
-
-        bc.nextBlock(newBlock);
-        bc.distribute();
+//        patientBc.addNewBlock(Arrays.asList(patient));
+        healthBc.addNewBlock(Arrays.asList(health));
     }
 }

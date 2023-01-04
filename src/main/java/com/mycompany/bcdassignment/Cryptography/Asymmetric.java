@@ -22,7 +22,7 @@ public class Asymmetric {
     private Cipher cipher;
 
     public Asymmetric() {
-        this(Constant.ENCRYPTION_ALG);
+        this(Constant.CIPHER_ALG);
     }
 
     public Asymmetric (String algorithm) {
