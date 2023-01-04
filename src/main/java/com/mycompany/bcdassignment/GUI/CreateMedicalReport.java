@@ -121,7 +121,6 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Signed By:");
 
-        btnSubmit.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -132,7 +131,6 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Patient Name:");
 
-        btnSubmit1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnSubmit1.setText("Reset");
         btnSubmit1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnSubmit1.addActionListener(new java.awt.event.ActionListener() {
@@ -278,6 +276,7 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
