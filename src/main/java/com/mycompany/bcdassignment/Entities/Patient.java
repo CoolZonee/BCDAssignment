@@ -4,10 +4,6 @@
  */
 package com.mycompany.bcdassignment.Entities;
 
-/**
- *
- * @author coolzone
- */
 public class Patient {
     private String UUID;
     private String patientName;
@@ -17,7 +13,7 @@ public class Patient {
     private String address;
     private String ethnicity;
     private String contactDetail;
-    private String emergencyContact;
+
     public static Integer[] confidential = {
             2,
             3,
@@ -27,7 +23,7 @@ public class Patient {
             7,
     };
 
-    public Patient(String UUID, String patientName, String IC, String dob, char gender, String address, String ethnicity, String contactDetail, String emergenyContact) {
+    public Patient(String UUID, String patientName, String IC, String dob, char gender, String address, String ethnicity, String contactDetail) {
         this.UUID = UUID;
         this.patientName = patientName;
         this.IC = IC;
@@ -36,8 +32,6 @@ public class Patient {
         this.address = address;
         this.ethnicity = ethnicity;
         this.contactDetail = contactDetail;
-        this.emergencyContact = emergenyContact;
-        this.relationship = relationship;
     }
 
     public String getUUID() {
@@ -72,10 +66,6 @@ public class Patient {
         return contactDetail;
     }
 
-    public String getEmergenyContact() {
-        return emergencyContact;
-    }
-
     public void setUUID(String UUID) {this.UUID= UUID; }
 
     public void setPatientName(String patientName) {
@@ -106,16 +96,8 @@ public class Patient {
         this.contactDetail = contactDetail;
     }
 
-    public void setEmergenyContact(String emergenyContact) {
-        this.emergencyContact = emergenyContact;
-    }
-    
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
-
     @Override
     public String toString() {
-        return "Patient{" + "UUID=" + UUID + "patientName=" + patientName + ", IC=" + IC + ", dob=" + dob + ", gender=" + gender + ", address=" + address + ", ethnicity=" + ethnicity + ", contactDetail=" + contactDetail + ", emergenyContact=" + emergencyContact + '}';
+        return "Patient{" + "UUID=" + UUID + "patientName=" + patientName + ", IC=" + IC + ", dob=" + dob + ", gender=" + gender + ", address=" + address + ", ethnicity=" + ethnicity + ", contactDetail=" + contactDetail + ", emergenyContact=" +  '}';
     }
 }

@@ -1,3 +1,6 @@
+-----User-----
+uuid,name,gender,email,contactNum,role,username,password
+
 -----Patient Record-----
 UUID,PatientName,IC,DOB,Gender,Address,Ethnicity,ContactDetails,EmergencyDetails
 
