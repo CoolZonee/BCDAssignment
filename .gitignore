@@ -8,7 +8,3 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 /target/
-
-# blockchain data
-src/main/java/com/mycompany/bcdassignment/ledger/*
-src/main/java/com/mycompany/bcdassignment/master/*

@@ -23,19 +23,19 @@ public class BCDAssignment {
 
     public static void main(String[] args) {
         // Patient Record
-//        String patientUUID = UUID.randomUUID().toString();
-        String healthRecordUUID = UUID.randomUUID().toString();
-//        String[] arr = {"John","763111482174","03/03/1976","M","XADDRESS","Chinese","0182325423","0169836437"};
+        String patientUUID = UUID.randomUUID().toString();
+//        String healthRecordUUID = UUID.randomUUID().toString();
+        String[] patient = {patientUUID, "John","763111482174","03/03/1976","M","XADDRESS","Chinese","0182325423"};
 //        String[] patient = {patientUUID, "Debbie", "863111482174","02/05/1986", "F", "XADDRESS", "Indian", "0122123423", "0182342137"};
 
         // Health Record
-        String[] health = {healthRecordUUID, "e8c55db5-2c1b-4962-8b69-d334a91a4d34", "170", "50.5", "A+", "allergies", "immunization", "familyhealthhistory"};
+//        String[] health = {healthRecordUUID, "e8c55db5-2c1b-4962-8b69-d334a91a4d34", "170", "50.5", "A+", "allergies", "immunization", "familyhealthhistory"};
 
 
-//        Blockchain patientBc = new Blockchain(PATIENT_RECORD);
-        Blockchain healthBc = new Blockchain(HEALTH_RECORD);
+        Blockchain patientBc = new Blockchain(PATIENT_RECORD);
+//        Blockchain healthBc = new Blockchain(HEALTH_RECORD);
 
-//        patientBc.addNewBlock(Arrays.asList(patient));
-        healthBc.addNewBlock(Arrays.asList(health));
+        patientBc.addNewBlock(Arrays.asList(patient));
+//        healthBc.addNewBlock(Arrays.asList(health));
     }
 }

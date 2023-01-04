@@ -4,6 +4,15 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Block;
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Entities.Patient;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author User
@@ -13,8 +22,32 @@ public class PatientDetails extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    int listSize = 0;
+    int currentIndex = 0;
+
+    List<Patient> patientList = new ArrayList<>();
     public PatientDetails() {
         initComponents();
+        Blockchain bc = new Blockchain(Constant.PATIENT_RECORD);
+        LinkedList<Block> list = bc.get();
+        // -1 because of genesis block
+        listSize = list.size() - 1;
+        list.forEach(e -> {
+            if(e.tranxRecord != null) {
+                List<String> user = e.tranxRecord.getDecryptedData();
+                patientList.add(new Patient(
+                    user.get(0),
+                    user.get(1),
+                    user.get(2),
+                    user.get(3),
+                    user.get(4).charAt(0),
+                    user.get(5),
+                    user.get(6),
+                    user.get(7)
+                ));
+            }
+        });
+        setDetails();
     }
 
     /**
@@ -97,8 +130,19 @@ public class PatientDetails extends javax.swing.JFrame {
         jLabel10.setText("Emergency No:");
 
         btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnPrev.setText("Previous");
+
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
 
         btnBack.setBackground(new java.awt.Color(204, 204, 204));
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
@@ -472,44 +516,29 @@ public class PatientDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRelationshipActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {
+        if (currentIndex > 0) {
+            currentIndex -= 1;
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PatientDetails().setVisible(true);
-            }
-        });
+        setDetails();
     }
 
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {
+        if (currentIndex < listSize - 1) {
+            currentIndex += 1;
+        }
+        setDetails();
+    }
+
+    private void setDetails () {
+        txtName.setText(patientList.get(currentIndex).getPatientName());
+        txtIc.setText(patientList.get(currentIndex).getIC());
+        txtDob.setText(patientList.get(currentIndex).getDob());
+        txtGender.setText(String.valueOf(patientList.get(currentIndex).getGender()));
+        txtAddr.setText(patientList.get(currentIndex).getAddress());
+        txtEthnicity.setText(patientList.get(currentIndex).getEthnicity());
+        txtContact.setText(patientList.get(currentIndex).getContactDetail());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreateAppoint;
