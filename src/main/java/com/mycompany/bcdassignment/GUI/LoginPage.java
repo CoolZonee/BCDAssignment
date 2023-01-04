@@ -4,6 +4,12 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Entities.Staff;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -167,6 +173,33 @@ public class LoginPage extends javax.swing.JFrame {
         MenuPage mp = new MenuPage();
         this.setVisible(false);
         mp.setVisible(true);
+        
+        //login
+//        String username = txtUsername.getText();
+//        String password = txtPassword.getText();
+//        int updateStatus = 0;
+//        
+//        boolean isAdmin = Staff.login();
+//        
+//        if(isAdmin == true) {
+//            JOptionPane.showMessageDialog(null, "Hello " + txtUsername.getText() + ", welcome back",
+//                    "Login successful", JOptionPane.INFORMATION_MESSAGE);
+//            try {
+//                updateStatus = admin.updateUserType();
+//            } catch (IOException ex) {
+//                Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            if(updateStatus == 0) {
+//                JOptionPane.showMessageDialog(null, "Failed to update user type",
+//                        "User unidentified", JOptionPane.ERROR_MESSAGE);
+//            }
+//            this.setVisible(false);
+//            Staff staff = new Staff();
+//            am.setVisible(true);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Incoorect username / password / employee ID combination",
+//                    "Invalid credentials", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

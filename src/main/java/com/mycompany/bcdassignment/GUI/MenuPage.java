@@ -4,6 +4,11 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -52,6 +57,11 @@ public class MenuPage extends javax.swing.JFrame {
         });
 
         jButton5.setText("Logout");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         btnViewStaff.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         btnViewStaff.setText("View Staff Details");
@@ -125,6 +135,12 @@ public class MenuPage extends javax.swing.JFrame {
         this.setVisible(false);
         new StaffDetails().setVisible(true);
     }//GEN-LAST:event_btnViewStaffActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginPage().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
