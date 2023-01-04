@@ -514,7 +514,7 @@ public class PatientDetails extends javax.swing.JFrame {
     private void btnViewMedRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewMedRepActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewMedicalReport().setVisible(true);
+        new ViewMedicalReport(patientList.get(currentIndex).getUUID()).setVisible(true);
     }//GEN-LAST:event_btnViewMedRepActionPerformed
 
     private void btnNext1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNext1ActionPerformed
