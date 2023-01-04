@@ -27,7 +27,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
         initComponents();
         Blockchain bc = new Blockchain(Constant.HEALTH_RECORD);
         LinkedList<Block> list = bc.get();
-        if (list.size() >= 2) {
+        if (list != null && list.size() >= 2) {
             var l = list.stream()
                     .filter(e -> e.tranxRecord != null)
                     .map(e -> e.tranxRecord.getDecryptedData())

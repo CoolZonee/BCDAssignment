@@ -344,6 +344,8 @@ public class InsertPatient extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Successful inserted a new patient!",
                     "Successful", JOptionPane.INFORMATION_MESSAGE);
+            new PatientDetails().setVisible(true);
+            this.setVisible(false);
         }
 
     }

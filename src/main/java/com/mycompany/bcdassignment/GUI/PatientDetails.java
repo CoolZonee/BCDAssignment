@@ -31,7 +31,7 @@ public class PatientDetails extends javax.swing.JFrame {
         Blockchain bc = new Blockchain(Constant.PATIENT_RECORD);
         LinkedList<Block> list = bc.get();
         // -1 because of genesis block
-        if (list.size() >= 2) {
+        if (list != null && list.size() >= 2) {
             listSize = list.size() - 1;
             list.forEach(e -> {
                 if (e.tranxRecord != null) {
