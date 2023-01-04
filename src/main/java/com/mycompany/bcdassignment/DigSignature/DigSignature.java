@@ -10,7 +10,7 @@ import java.util.Base64;
 
 /**
  *
- * @author Chuwei
+ * @author chuwei11
  */
 public class DigSignature {
     private Signature signature;
@@ -18,20 +18,63 @@ public class DigSignature {
     PrivateKey priKey;
     String signatureAlg = "SHA256WithRSA";
 
-    public DigSignature(String pubKey, String prikey) {
+    public DigSignature(String publicKey, String privatekey) {
         try{
             signature = Signature.getInstance(signatureAlg);
-            pubKey = stringToPublicKey(pubKey);
-            prikey = stringToPrivateKey(prikey);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            pubKey = stringToPublicKey(publicKey);
+            priKey = stringToPrivateKey(privatekey);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public PublicKey stringToPublicKey(String encodedPubKey) {
-        byte[] decoded = Base64.getDecoder().decode(encodedPubKey);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
-        KeyFactory keyFac = KeyFactory.getInstance("RSA");
+        try {
+            byte[] decoded = Base64.getDecoder().decode(encodedPubKey);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
+            KeyFactory keyFac = KeyFactory.getInstance("RSA");
+            return keyFac.generatePublic(keySpec);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public PrivateKey stringToPrivateKey(String encodedPriKey) {
+        try {
+            byte[] decoded = Base64.getDecoder().decode(encodedPriKey);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
+            KeyFactory keyFac = KeyFactory.getInstance("RSA");
+            return keyFac.generatePrivate(keySpec);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // use priKey to sign
+    public String sign(String data) {
+        try {
+            signature.initSign(priKey);
+            signature.update(data.getBytes());
+            return Base64.getEncoder().encodeToString(signature.sign());
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // verify with pubKey
+    public boolean verify(String data, String signatureString){
+        try{
+            signature.initVerify(pubKey);
+            signature.update(data.getBytes());
+            return signature.verify(Base64.getDecoder().decode(signatureString));
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 
     }
+
 }
