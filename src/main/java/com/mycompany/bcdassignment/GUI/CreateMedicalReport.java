@@ -4,6 +4,20 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Block;
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.DigSignature.DigSignature;
+import com.mycompany.bcdassignment.Entities.MedicalAppointment;
+import com.mycompany.bcdassignment.Entities.MedicalRecord;
+import com.mycompany.bcdassignment.Entities.User;
+import com.mycompany.bcdassignment.Main;
+
+import javax.swing.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author User
@@ -13,8 +27,29 @@ public class CreateMedicalReport extends javax.swing.JFrame {
     /**
      * Creates new form ViewMedicalReport
      */
-    public CreateMedicalReport() {
+    private String patientUUID;
+    List<List<String>> apList;
+    int i;
+    public CreateMedicalReport(String patientUUID) {
         initComponents();
+        this.patientUUID = patientUUID;
+        Blockchain appointBc = new Blockchain(Constant.MEDICAL_APPOINTMENT);
+        LinkedList<Block> list = appointBc.get();
+        if (list != null && list.size() >= 2) {
+            apList = list.stream()
+                    .filter(e -> e.tranxRecord != null)
+                    .map(e -> e.tranxRecord.tranxList)
+                    .filter(e -> e
+                            .get(1)
+                            .equals(patientUUID)
+                    )
+                    .toList();
+            if (apList.size() > 0) {
+                for (List<String> ap: apList) {
+                    cmbAppointmentID.addItem(ap.get(0));
+                }
+            }
+        }
     }
 
     /**
@@ -40,10 +75,8 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         txtTreatment = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtMed = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtInpatient = new javax.swing.JTextField();
         txtTime = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -52,13 +85,11 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txtDoc = new javax.swing.JTextField();
-        txtId = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtReason = new javax.swing.JTextArea();
-        jLabel12 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
         btnSubmit1 = new javax.swing.JButton();
+        cmbAppointmentID = new javax.swing.JComboBox<>();
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -70,6 +101,8 @@ public class CreateMedicalReport extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Appointment ID:");
+
+        txtSign.setEditable(false);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Date:");
@@ -89,14 +122,13 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Medicines:");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("Inpatient Requirement:");
-
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setText("Time:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Lab Test Result:");
+
+        txtTime.setEditable(false);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel2.setText("Create Medical Report");
@@ -107,6 +139,8 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         txtLabTestRes.setColumns(20);
         txtLabTestRes.setRows(5);
         jScrollPane1.setViewportView(txtLabTestRes);
+
+        txtDate.setEditable(false);
 
         btnBack.setBackground(new java.awt.Color(204, 204, 204));
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
@@ -121,21 +155,32 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Signed By:");
 
+        txtDoc.setEditable(false);
+
         btnSubmit.setText("Submit");
         btnSubmit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
+        txtReason.setEditable(false);
         txtReason.setColumns(20);
         txtReason.setRows(5);
         jScrollPane3.setViewportView(txtReason);
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setText("Patient Name:");
 
         btnSubmit1.setText("Reset");
         btnSubmit1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnSubmit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmit1ActionPerformed(evt);
+            }
+        });
+
+        cmbAppointmentID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAppointmentIDActionPerformed(evt);
             }
         });
 
@@ -170,8 +215,7 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(64, 64, 64)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -180,10 +224,9 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtId)
                                     .addComponent(jScrollPane3)
                                     .addComponent(txtDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(cmbAppointmentID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,15 +234,10 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                                         .addComponent(jLabel11)
                                         .addGap(58, 58, 58)
                                         .addComponent(txtSign, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addGap(64, 64, 64)
-                                            .addComponent(txtInpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(379, 379, 379)
+                                        .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -208,14 +246,10 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbAppointmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -249,11 +283,7 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(txtInpatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtSign, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -261,7 +291,7 @@ public class CreateMedicalReport extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,9 +321,61 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         clearFields();
     }//GEN-LAST:event_btnSubmit1ActionPerformed
 
+    private void cmbAppointmentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAppointmentIDActionPerformed
+        // TODO add your handling code here:
+        i = cmbAppointmentID.getSelectedIndex();
+        List<String> ap = apList.get(i);
+        txtDate.setText(ap.get(2));
+        txtTime.setText(ap.get(3));
+        txtDoc.setText(ap.get(4));
+        txtReason.setText(ap.get(5));
+        txtSign.setText(ap.get(6));
+    }//GEN-LAST:event_cmbAppointmentIDActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        if (
+                txtDiagnosis.getText().isEmpty() ||
+                txtTreatment.getText().isEmpty() ||
+                txtMed.getText().isEmpty() ||
+                txtLabTestRes.getText().isEmpty()
+        ) {
+            JOptionPane.showMessageDialog(null, "One or more fields are blank.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String reportUUID = UUID.randomUUID().toString();
+            User user = Main.currentUser;
+            System.out.println(user.toString());
+            DigSignature ds = new DigSignature(user.getPublicKey(), user.getPrivateKey());
+            String signature = ds.sign(reportUUID+
+                    this.patientUUID+
+                    txtDiagnosis.getText() +
+                    txtTreatment.getText() +
+                    txtMed.getText() +
+                    txtLabTestRes.getText()
+            );
+            List<String> ap = apList.get(i);
+            MedicalRecord mr = new MedicalRecord(
+                    reportUUID,
+                    ap.get(0),
+                    txtDiagnosis.getText(),
+                    txtTreatment.getText(),
+                    txtMed.getText(),
+                    txtLabTestRes.getText(),
+                    user.getName(),
+                    signature
+            );
+            Blockchain mrBc = new Blockchain(Constant.MEDICAL_RECORD);
+
+            mrBc.addNewBlock(mr.toList(), MedicalRecord.confidential);
+            new PatientDetails().setVisible(true);
+            this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Successful created a medical record!",
+                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
     public void clearFields() {
-        txtName.setText("");
-        txtId.setText("");
         txtDoc.setText("");
         txtDate.setText("");
         txtTime.setText("");
@@ -302,55 +384,17 @@ public class CreateMedicalReport extends javax.swing.JFrame {
         txtTreatment.setText("");
         txtMed.setText("");
         txtLabTestRes.setText("");
-        txtInpatient.setText("");
         txtSign.setText("");
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateMedicalReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateMedicalReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateMedicalReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateMedicalReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateMedicalReport().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnSubmit1;
+    private javax.swing.JComboBox<String> cmbAppointmentID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -359,7 +403,6 @@ public class CreateMedicalReport extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -368,11 +411,8 @@ public class CreateMedicalReport extends javax.swing.JFrame {
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDiagnosis;
     private javax.swing.JTextField txtDoc;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtInpatient;
     private javax.swing.JTextArea txtLabTestRes;
     private javax.swing.JTextField txtMed;
-    private javax.swing.JTextField txtName;
     private javax.swing.JTextArea txtReason;
     private javax.swing.JTextField txtSign;
     private javax.swing.JTextField txtTime;
