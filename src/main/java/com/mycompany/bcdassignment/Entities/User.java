@@ -4,6 +4,8 @@
  */
 package com.mycompany.bcdassignment.Entities;
 
+import java.util.List;
+
 /**
  *
  * @author User
@@ -103,5 +105,18 @@ public class User {
                 role + ',' +
                 username + ',' +
                 password;
+    }
+
+    public List<String> toList() {
+        return List.of(new String[]{
+                UUID,
+                name,
+                String.valueOf(gender),
+                email,
+                contactNumber,
+                role,
+                username,
+                password
+        });
     }
 }

@@ -4,11 +4,14 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Block;
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
 import com.mycompany.bcdassignment.Entities.User;
 import com.mycompany.bcdassignment.Hashing.Hasher;
-import com.mycompany.bcdassignment.Controller.UserController;
 
 import javax.swing.*;
+import java.util.LinkedList;
 import java.util.UUID;
 
 /**
@@ -269,24 +272,40 @@ public class RegisterNewStaff extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "One or more fields are empty!",
                     "Empty Fields", JOptionPane.ERROR_MESSAGE);
         } else {
-            UserController uc = UserController.getInstance();
-            try {
-                uc.addUser(new User(
-                        UUID.randomUUID().toString(),
-                        txtName.getText(),
-                        cmbBoxGender.getSelectedItem().toString().charAt(0),
-                        txtEmail.getText(),
-                        txtContactNo.getText(),
-                        cmbBoxRole.getSelectedItem().toString(),
-                        txtUsername.getText(),
-                        Hasher.sha256(txtPassword.getText())
-                ));
-                JOptionPane.showMessageDialog(null, "Register Successful",
-                        "Successful", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(),
-                        "Error", JOptionPane.ERROR_MESSAGE);
+            Blockchain userBc = new Blockchain(Constant.USER);
+            LinkedList<Block> list = userBc.get();
+            if (list != null && list.size() >= 2) {
+                var l = list.stream()
+                        .filter(e -> e.tranxRecord != null)
+                        .map(e -> e.tranxRecord.getDecryptedData())
+                        .filter(e -> e.get(e.size() - 2).equals(txtUsername.getText())).toList();
+                if (l.size() > 0) {
+                    JOptionPane.showMessageDialog(null, "Username existed!",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    clearFields();
+                    return;
+                }
             }
+
+            String userUUID = UUID.randomUUID().toString();
+            User user = new User(
+                    userUUID,
+                    txtName.getText(),
+                    cmbBoxGender.getSelectedItem().toString().charAt(0),
+                    txtEmail.getText(),
+                    txtContactNo.getText(),
+                    cmbBoxRole.getSelectedItem().toString(),
+                    txtUsername.getText(),
+                    Hasher.sha256(txtPassword.getText())
+            );
+
+
+            userBc.addNewBlock(user.toList());
+
+            JOptionPane.showMessageDialog(null, "Successful register a new staff!",
+                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            new LoginPage().setVisible(true);
         }
     }
 

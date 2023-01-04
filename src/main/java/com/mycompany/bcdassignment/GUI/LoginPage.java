@@ -4,10 +4,16 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Block;
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Entities.User;
 import com.mycompany.bcdassignment.Hashing.Hasher;
-import com.mycompany.bcdassignment.Controller.UserController;
+import com.mycompany.bcdassignment.Main;
 
 import javax.swing.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -172,19 +178,35 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        UserController uc = UserController.getInstance();
-        if (uc.getUserList()
-                .stream()
-                .anyMatch(e -> e.getUsername().equals(username) && e.getPassword().equals(Hasher.sha256(password))))
-        {
-            this.setVisible(false);
-            new MenuPage().setVisible(true);
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Incorrect username or password",
-                    "Invalid credentials", JOptionPane.ERROR_MESSAGE);
-        }
 
+        Blockchain bc = new Blockchain(Constant.USER);
+        LinkedList<Block> list = bc.get();
+        if (list != null && list.size() >= 2) {
+            var l = list.stream()
+                    .filter(e -> e.tranxRecord != null)
+                    .map(e -> e.tranxRecord.getDecryptedData())
+                    .filter(e -> e.get(e.size() - 2).equals(username)
+                            && e.get(e.size() - 1).equals(Hasher.sha256(password))).toList();
+
+            if (l.size() == 1) {
+                List<String> user = l.get(0);
+                Main.currentUser = new User(
+                        user.get(0),
+                        user.get(1),
+                        user.get(2).charAt(0),
+                        user.get(3),
+                        user.get(4),
+                        user.get(5),
+                        user.get(6),
+                        user.get(7)
+                );
+                this.setVisible(false);
+                new MenuPage().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Incorrect username or password",
+                        "Invalid credentials", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
 
