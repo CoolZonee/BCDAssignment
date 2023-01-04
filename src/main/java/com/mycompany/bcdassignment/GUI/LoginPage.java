@@ -178,7 +178,7 @@ public class LoginPage extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String password = String.valueOf(txtPassword.getPassword());
 
         Blockchain bc = new Blockchain(Constant.USER);
         LinkedList<Block> list = bc.get();

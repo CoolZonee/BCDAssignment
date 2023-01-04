@@ -44,7 +44,6 @@ public class RegisterNewStaff extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtContactNo = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         cmbBoxGender = new javax.swing.JComboBox<>();
         cmbBoxRole = new javax.swing.JComboBox<>();
         btnSubmit = new javax.swing.JButton();
@@ -58,6 +57,7 @@ public class RegisterNewStaff extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,8 +77,6 @@ public class RegisterNewStaff extends javax.swing.JFrame {
                 txtUsernameActionPerformed(evt);
             }
         });
-
-        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         cmbBoxGender.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbBoxGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
@@ -168,18 +166,18 @@ public class RegisterNewStaff extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                                     .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel12)
                                         .addComponent(jLabel14))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(cmbBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(txtContactNo, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                                        .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                                        .addComponent(txtPassword)))))))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,11 +212,11 @@ public class RegisterNewStaff extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,13 +263,13 @@ public class RegisterNewStaff extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         if (
                 txtName.getText().equals("") ||
-                txtEmail.getText().equals("") ||
-                txtContactNo.getText().equals("") ||
-                txtUsername.getText().equals("") ||
-                txtPassword.getText().equals("")
+                        txtEmail.getText().equals("") ||
+                        txtContactNo.getText().equals("") ||
+                        txtUsername.getText().equals("") ||
+                        String.valueOf(txtPassword.getPassword()).equals("")
         ) {
             JOptionPane.showMessageDialog(null, "One or more fields are empty!",
                     "Empty Fields", JOptionPane.ERROR_MESSAGE);
@@ -301,7 +299,7 @@ public class RegisterNewStaff extends javax.swing.JFrame {
                     txtContactNo.getText(),
                     cmbBoxRole.getSelectedItem().toString(),
                     txtUsername.getText(),
-                    Hasher.sha256(txtPassword.getText()),
+                    Hasher.sha256(String.valueOf(txtPassword.getPassword())),
                     Base64.getEncoder().encodeToString(KPKeyPair.getPublicKey().getEncoded()),
                     Base64.getEncoder().encodeToString(KPKeyPair.getPrivateKey().getEncoded())
             );
@@ -313,7 +311,7 @@ public class RegisterNewStaff extends javax.swing.JFrame {
                     "Successful", JOptionPane.INFORMATION_MESSAGE);
 
         }
-    }
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -333,7 +331,7 @@ public class RegisterNewStaff extends javax.swing.JFrame {
     private javax.swing.JTextField txtContactNo;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
