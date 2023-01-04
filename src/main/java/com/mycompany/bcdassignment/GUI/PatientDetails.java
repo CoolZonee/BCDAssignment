@@ -496,13 +496,13 @@ public class PatientDetails extends javax.swing.JFrame {
     private void btnViewAppointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppointActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewAppointmentDetails().setVisible(true);
+        new ViewAppointmentDetails(patientList.get(currentIndex).getUUID()).setVisible(true);
     }//GEN-LAST:event_btnViewAppointActionPerformed
 
     private void btnCreateAppointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new CreateAppointment().setVisible(true);
+        new CreateAppointment(patientList.get(currentIndex).getUUID()).setVisible(true);
     }//GEN-LAST:event_btnCreateAppointActionPerformed
 
     private void btnCreateMedRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateMedRepActionPerformed

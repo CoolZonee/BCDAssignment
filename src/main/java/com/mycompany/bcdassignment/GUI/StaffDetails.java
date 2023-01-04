@@ -34,7 +34,7 @@ public class StaffDetails extends javax.swing.JFrame {
             list.forEach(e -> {
                 if (e.tranxRecord != null) {
                     List<String> user = e.tranxRecord.tranxList;
-                    userList.add(new User(
+                    User newUser = new User(
                             user.get(0),
                             user.get(1),
                             user.get(2).charAt(0),
@@ -42,12 +42,15 @@ public class StaffDetails extends javax.swing.JFrame {
                             user.get(4),
                             user.get(5),
                             user.get(6),
-                            user.get(7)
-                    ));
+                            user.get(7),
+                            user.get(8),
+                            user.get(9)
+                    );
+                    userList.add(newUser);
                 }
             });
+            setDetails();
         }
-        setDetails();
     }
 
     /**
@@ -354,7 +357,7 @@ public class StaffDetails extends javax.swing.JFrame {
         }
         setDetails();
     }                                        
-    
+
     /**
      * @param args the command line arguments
      */
@@ -400,6 +403,8 @@ public class StaffDetails extends javax.swing.JFrame {
         txtEmail.setText(userList.get(currentIndex).getEmail());
         txtPhoneNo.setText(userList.get(currentIndex).getContactNumber());
         txtRole.setText(userList.get(currentIndex).getRole());
+        txtPubKey.setText(userList.get(currentIndex).getPublicKey());
+        txtPriKey.setText(userList.get(currentIndex).getPrivateKey());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,127 +4,123 @@
  */
 package com.mycompany.bcdassignment.Entities;
 
+import java.util.List;
+
 /**
  *
  * @author coolzone
  */
 public class MedicalAppointment {
     private String UUID;
+    private String patientUUID;
     private String date;
     private String time;
     private String doctorInCharge;
     private String reason;
-    private String diagnosisDetails;
-    private String treatment;
-    private String medicines;
-    private String labTestResult;
-    private boolean inpatient;
-    public static String[] confidential = {
-        "reason",
-        "diagnosisDetails",
-        "treatment",
-        "medicines",
-        "labTestResult",
-        "inpatient",
-    };
+    private String signedBy;
+    private String signatureValue;
 
-    public MedicalAppointment(String UUID, String date, String time, String doctorInCharge, String reason, String diagnosisDetails, String treatment, String medicines, String labTestResult, boolean inpatient) {
+    public static Integer[] confidential = {};
+
+    public MedicalAppointment(String UUID, String patientUUID, String date, String time, String doctorInCharge, String reason, String signedBy, String signatureValue) {
         this.UUID = UUID;
+        this.patientUUID = patientUUID;
         this.date = date;
         this.time = time;
         this.doctorInCharge = doctorInCharge;
         this.reason = reason;
-        this.diagnosisDetails = diagnosisDetails;
-        this.treatment = treatment;
-        this.medicines = medicines;
-        this.labTestResult = labTestResult;
-        this.inpatient = inpatient;
+        this.signedBy = signedBy;
+        this.signatureValue = signatureValue;
     }
 
     public String getUUID() {
         return UUID;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public String getDoctorInCharge() {
-        return doctorInCharge;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public String getDiagnosisDetails() {
-        return diagnosisDetails;
-    }
-
-    public String getTreatment() {
-        return treatment;
-    }
-
-    public String getMedicines() {
-        return medicines;
-    }
-
-    public String getLabTestResult() {
-        return labTestResult;
-    }
-
-    public boolean isInpatient() {
-        return inpatient;
-    }
-
     public void setUUID(String UUID) {
         this.UUID = UUID;
+    }
+
+    public String getPatientUUID() {
+        return patientUUID;
+    }
+
+    public void setPatientUUID(String patientUUID) {
+        this.patientUUID = patientUUID;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void setDate(String date) {
         this.date = date;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDoctorInCharge() {
+        return doctorInCharge;
     }
 
     public void setDoctorInCharge(String doctorInCharge) {
         this.doctorInCharge = doctorInCharge;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
     public void setReason(String reason) {
         this.reason = reason;
     }
 
-    public void setDiagnosisDetails(String diagnosisDetails) {
-        this.diagnosisDetails = diagnosisDetails;
+    public String getSignedBy() {
+        return signedBy;
     }
 
-    public void setTreatment(String treatment) {
-        this.treatment = treatment;
+    public void setSignedBy(String signedBy) {
+        this.signedBy = signedBy;
     }
 
-    public void setMedicines(String medicines) {
-        this.medicines = medicines;
+    public String getSignatureValue() {
+        return signatureValue;
     }
 
-    public void setLabTestResult(String labTestResult) {
-        this.labTestResult = labTestResult;
-    }
-
-    public void setInpatient(boolean inpatient) {
-        this.inpatient = inpatient;
+    public void setSignatureValue(String signatureValue) {
+        this.signatureValue = signatureValue;
     }
 
     @Override
     public String toString() {
-        return "MedicalAppointment{" + "UUID=" + UUID + ", date=" + date + ", time=" + time + ", doctorInCharge=" + doctorInCharge + ", reason=" + reason + ", diagnosisDetails=" + diagnosisDetails + ", treatment=" + treatment + ", medicines=" + medicines + ", labTestResult=" + labTestResult + ", inpatient=" + inpatient + '}';
+        return "MedicalAppointment{" +
+                "UUID='" + UUID + '\'' +
+                ", patientUUID='" + patientUUID + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", doctorInCharge='" + doctorInCharge + '\'' +
+                ", reason='" + reason + '\'' +
+                ", signedBy='" + signedBy + '\'' +
+                ", signatureValue='" + signatureValue + '\'' +
+                '}';
     }
-    
-    
+
+    public List<String> toList() {
+        return List.of(new String[] {
+           UUID,
+           patientUUID,
+           date,
+           time,
+           doctorInCharge,
+           reason,
+           signedBy,
+           signatureValue
+        });
+    }
 }

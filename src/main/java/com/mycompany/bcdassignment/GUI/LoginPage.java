@@ -188,8 +188,8 @@ public class LoginPage extends javax.swing.JFrame {
             var l = list.stream()
                     .filter(e -> e.tranxRecord != null)
                     .map(e -> e.tranxRecord.tranxList)
-                    .filter(e -> e.get(e.size() - 2).equals(username)
-                            && e.get(e.size() - 1).equals(Hasher.sha256(password))).toList();
+                    .filter(e -> e.get(6).equals(username)
+                            && e.get(7).equals(Hasher.sha256(password))).toList();
 
             if (l.size() == 1) {
                 List<String> user = l.get(0);
@@ -201,7 +201,9 @@ public class LoginPage extends javax.swing.JFrame {
                         user.get(4),
                         user.get(5),
                         user.get(6),
-                        user.get(7)
+                        user.get(7),
+                        user.get(8),
+                        user.get(9)
                 );
                 this.setVisible(false);
                 new MenuPage().setVisible(true);

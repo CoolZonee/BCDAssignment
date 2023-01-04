@@ -19,9 +19,12 @@ public class User {
     private String role;
     private String username;
     private String password;
+    private String publicKey;
+    private String privateKey;
+
     public static Integer[] confidential = {};
 
-    public User(String UUID, String name, char gender, String email, String contactNumber, String role, String username, String password) {
+    public User(String UUID, String name, char gender, String email, String contactNumber, String role, String username, String password, String publicKey, String privateKey) {
         this.UUID = UUID;
         this.name = name;
         this.gender = gender;
@@ -30,6 +33,8 @@ public class User {
         this.role = role;
         this.username = username;
         this.password = password;
+        this.publicKey = publicKey;
+        this.privateKey = privateKey;
     }
 
     public String getUUID() {
@@ -64,6 +69,9 @@ public class User {
         return password;
     }
 
+    public String getPublicKey() {return publicKey; }
+    public String getPrivateKey() {return privateKey;}
+
     public void setUUID(String UUID) {
         this.UUID = UUID;
     }
@@ -96,6 +104,10 @@ public class User {
         this.password = password;
     }
 
+    public void setPublicKey(String publicKey) { this.publicKey = publicKey; }
+
+    public void setPrivateKey(String privateKey) { this.privateKey = privateKey; }
+
     @Override
     public String toString() {
         return UUID + ',' +
@@ -105,7 +117,9 @@ public class User {
                 contactNumber + ',' +
                 role + ',' +
                 username + ',' +
-                password;
+                password + ',' +
+                publicKey + ',' +
+                privateKey;
     }
 
     public List<String> toList() {
@@ -117,7 +131,9 @@ public class User {
                 contactNumber,
                 role,
                 username,
-                password
+                password,
+                publicKey,
+                privateKey
         });
     }
 }
