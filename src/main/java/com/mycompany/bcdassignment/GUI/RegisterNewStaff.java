@@ -6,7 +6,7 @@ package com.mycompany.bcdassignment.GUI;
 
 import com.mycompany.bcdassignment.Entities.User;
 import com.mycompany.bcdassignment.Hashing.Hasher;
-import com.mycompany.bcdassignment.UserController;
+import com.mycompany.bcdassignment.Controller.UserController;
 
 import javax.swing.*;
 import java.util.UUID;

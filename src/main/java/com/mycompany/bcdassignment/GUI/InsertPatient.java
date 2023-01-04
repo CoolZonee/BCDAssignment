@@ -4,6 +4,14 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Entities.Patient;
+
+import javax.swing.*;
+import java.util.Arrays;
+import java.util.UUID;
+
 /**
  *
  * @author User
@@ -142,7 +150,11 @@ public class InsertPatient extends javax.swing.JFrame {
         btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setText("Relationship:");
 
@@ -302,7 +314,41 @@ public class InsertPatient extends javax.swing.JFrame {
         clearFields();
     }//GEN-LAST:event_btnResetActionPerformed
 
-        private void clearFields() {
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
+        if (
+            txtName.getText().isEmpty() ||
+            txtIc.getText().isEmpty() ||
+            txtDob.getText().isEmpty() ||
+            txtAddr.getText().isEmpty() ||
+            txtEthnicity.getText().isEmpty() ||
+            txtContact.getText().isEmpty()
+        ) {
+            JOptionPane.showMessageDialog(null, "One or more fields are blank.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String patientUUID = UUID.randomUUID().toString();
+            Patient patient = new Patient(
+                    patientUUID,
+                    txtName.getText(),
+                    txtIc.getText(),
+                    txtDob.getText(),
+                    cmbGender.getSelectedItem().toString().charAt(0),
+                    txtAddr.getText(),
+                    txtEthnicity.getText(),
+                    txtContact.getText()
+            );
+
+            Blockchain healthBc = new Blockchain(Constant.PATIENT_RECORD);
+
+            healthBc.addNewBlock(patient.toList());
+
+            JOptionPane.showMessageDialog(null, "Successful inserted a new patient!",
+                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    private void clearFields() {
         txtName.setText("");
         txtIc.setText("");
         txtDob.setText("");

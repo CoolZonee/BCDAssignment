@@ -5,7 +5,7 @@
 package com.mycompany.bcdassignment.GUI;
 
 import com.mycompany.bcdassignment.Hashing.Hasher;
-import com.mycompany.bcdassignment.UserController;
+import com.mycompany.bcdassignment.Controller.UserController;
 
 import javax.swing.*;
 

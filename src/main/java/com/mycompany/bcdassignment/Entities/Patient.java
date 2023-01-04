@@ -4,6 +4,9 @@
  */
 package com.mycompany.bcdassignment.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Patient {
     private String UUID;
     private String patientName;
@@ -98,6 +101,19 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" + "UUID=" + UUID + "patientName=" + patientName + ", IC=" + IC + ", dob=" + dob + ", gender=" + gender + ", address=" + address + ", ethnicity=" + ethnicity + ", contactDetail=" + contactDetail + ", emergenyContact=" +  '}';
+        return "Patient{" +
+                "UUID='" + UUID + '\'' +
+                ", patientName='" + patientName + '\'' +
+                ", IC='" + IC + '\'' +
+                ", dob='" + dob + '\'' +
+                ", gender=" + gender +
+                ", address='" + address + '\'' +
+                ", ethnicity='" + ethnicity + '\'' +
+                ", contactDetail='" + contactDetail + '\'' +
+                '}';
+    }
+
+    public List<String> toList() {
+        return List.of(new String[]{UUID, patientName, IC, dob, String.valueOf(gender), address, ethnicity, contactDetail});
     }
 }
