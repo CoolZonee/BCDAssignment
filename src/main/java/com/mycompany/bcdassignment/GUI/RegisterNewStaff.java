@@ -7,10 +7,13 @@ package com.mycompany.bcdassignment.GUI;
 import com.mycompany.bcdassignment.Blockchain.Block;
 import com.mycompany.bcdassignment.Blockchain.Blockchain;
 import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Cryptography.KPKeyPair;
 import com.mycompany.bcdassignment.Entities.User;
 import com.mycompany.bcdassignment.Hashing.Hasher;
 
 import javax.swing.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.UUID;
 
@@ -289,6 +292,7 @@ public class RegisterNewStaff extends javax.swing.JFrame {
             }
 
             String userUUID = UUID.randomUUID().toString();
+            KPKeyPair.create();
             User user = new User(
                     userUUID,
                     txtName.getText(),
@@ -297,9 +301,10 @@ public class RegisterNewStaff extends javax.swing.JFrame {
                     txtContactNo.getText(),
                     cmbBoxRole.getSelectedItem().toString(),
                     txtUsername.getText(),
-                    Hasher.sha256(txtPassword.getText())
+                    Hasher.sha256(txtPassword.getText()),
+                    Base64.getEncoder().encodeToString(KPKeyPair.getPublicKey().getEncoded()),
+                    Base64.getEncoder().encodeToString(KPKeyPair.getPrivateKey().getEncoded())
             );
-
 
             userBc.addNewBlock(user.toList(), User.confidential);
             this.setVisible(false);
