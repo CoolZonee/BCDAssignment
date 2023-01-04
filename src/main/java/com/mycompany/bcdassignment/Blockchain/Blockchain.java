@@ -16,26 +16,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
+import java.util.List;
+
+import static com.mycompany.bcdassignment.Constant.MASTER_BINARY_DIR;
+import static com.mycompany.bcdassignment.Constant.MASTER_LEDGER_DIR;
 
 public class Blockchain {
     private static LinkedList<Block> chain = new LinkedList<>();
     private final String ledgerFileName, chainFileName;
 
-    // Singleton pattern
-    private static Blockchain _instance;
-    public static Blockchain getInstance(String moduleName) {
-        if (_instance == null) {
-            _instance = new Blockchain(moduleName);
-        }
-        return _instance;
-    }
-
-    private Blockchain (String moduleName) {
+    public Blockchain (String moduleName) {
         this.chainFileName = Constant.MASTER_BINARY_DIR + "/" + moduleName + ".bin";
         this.ledgerFileName = Constant.MASTER_LEDGER_DIR + "/" + moduleName + ".txt";
     }
-    // Singleton pattern
-
     /**
      * genesis()
      */
@@ -60,6 +53,28 @@ public class Blockchain {
         persist();
     }
 
+    public void addNewBlock(List<String> arr) {
+        if (!(new File(MASTER_BINARY_DIR).exists())) {
+            new File(MASTER_BINARY_DIR).mkdir();
+            new File(MASTER_LEDGER_DIR).mkdir();
+        }
+
+        if (!(new File(this.chainFileName).exists())) {
+            genesis();
+        }
+
+        TransactionCollection tranxs = new TransactionCollection(arr);
+        MerkleTree mt = new MerkleTree(arr);
+        mt.build();
+
+        String prevHash = get().getLast().getHeader().getCurrHash();
+
+        Block newBlock = new Block(prevHash, mt.getRoot());
+        newBlock.setTranxRecord(tranxs);
+
+        nextBlock(newBlock);
+        distribute();
+    }
     /**
      * get()
      */

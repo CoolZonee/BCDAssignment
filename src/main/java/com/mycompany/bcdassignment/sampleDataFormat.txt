@@ -1,6 +1,13 @@
 -----Patient Record-----
-PatientName,IC,DOB,Gender,Address,Ethnicity,ContactDetails,EmergencyDetails
+UUID,PatientName,IC,DOB,Gender,Address,Ethnicity,ContactDetails,EmergencyDetails
 
-John,763111482174,03/03/1976,M,XADDRESS,Chinese,0182325423,0169836437
-Debbie,863111482174,02/05/1986,F,XADDRESS,Indian,0122123423,0182342137
-Ali,023111482174,03/03/1976,M,XADDRESS,Malay,0105625423,0169823437
+UUID,John,763111482174,03/03/1976,M,XADDRESS,Chinese,0182325423,0169836437
+UUID,Debbie,863111482174,02/05/1986,F,XADDRESS,Indian,0122123423,0182342137
+UUID,Ali,023111482174,03/03/1976,M,XADDRESS,Malay,0105625423,0169823437
+
+-----Health Record-----
+UUID,patientUUID,height,weight,bloodType,allergies,immunization,familyHealthHistory
+
+-----Appointment Record-----
+
+-----Medical Report------

@@ -28,19 +28,9 @@ public class MerkleTree {
      * Set the transaction list to the MerkleTree object.
      @param tranxLst
      */
-    private MerkleTree(List<String> tranxLst) {
+    public MerkleTree(List<String> tranxLst) {
         super();
         this.tranxLst = tranxLst;
-    }
-    /**
-     * Design pattern: Singleton
-     * */
-    private static MerkleTree instance;
-    public static MerkleTree getInstance( List<String> tranxLst ) {
-        if( instance == null ) {
-            instance = new MerkleTree(tranxLst);
-        }
-        return instance;
     }
     /**
      * @implNote

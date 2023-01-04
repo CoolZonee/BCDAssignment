@@ -10,23 +10,27 @@ package com.mycompany.bcdassignment.Entities;
  */
 public class HealthRecord {
     private String UUID;
+
+    private String patientUUID;
     private double height;
     private double weight;
     private String bloodType;
     private String allergies;
     private String immunization;
     private String familyHealthHistory;
-    public static String[] confidential = {
-        "height",
-        "weight",
-        "bloodType",
-        "allergies",
-        "immunization",
-        "familyHealthHistory",
+
+    public static Integer[] confidential = {
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
     };
 
-    public HealthRecord(String UUID, double height, double weight, String bloodType, String allergies, String immunization, String familyHealthHistory) {
+    public HealthRecord(String UUID, String patientUUID, double height, double weight, String bloodType, String allergies, String immunization, String familyHealthHistory) {
         this.UUID = UUID;
+        this.patientUUID = patientUUID;
         this.height = height;
         this.weight = weight;
         this.bloodType = bloodType;
@@ -38,6 +42,8 @@ public class HealthRecord {
     public String getUUID() {
         return UUID;
     }
+
+    public String getPatientUUID() { return patientUUID; }
 
     public double getHeight() {
         return height;
@@ -67,6 +73,8 @@ public class HealthRecord {
         this.UUID = UUID;
     }
 
+    public void setPatientUUID(String patientUUID) {this.patientUUID = patientUUID;}
+
     public void setHeight(double height) {
         this.height = height;
     }
@@ -93,6 +101,6 @@ public class HealthRecord {
 
     @Override
     public String toString() {
-        return "HealthRecord{" + "UUID=" + UUID + ", height=" + height + ", weight=" + weight + ", bloodType=" + bloodType + ", allergies=" + allergies + ", immunization=" + immunization + ", familyHealthHistory=" + familyHealthHistory + '}';
+        return "HealthRecord{" + "UUID=" + UUID + ", patientUUID=" + patientUUID + ", height=" + height + ", weight=" + weight + ", bloodType=" + bloodType + ", allergies=" + allergies + ", immunization=" + immunization + ", familyHealthHistory=" + familyHealthHistory + '}';
     }
 }

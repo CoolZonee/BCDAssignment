@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-        Blockchain bc = Blockchain.getInstance(Constant.PATIENT_RECORD);
+        Blockchain bc = new Blockchain(Constant.HEALTH_RECORD);
         LinkedList<Block> list = bc.get();
         List<Patient> patientList = new ArrayList<>();
         System.out.println(list.size());
