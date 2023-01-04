@@ -17,6 +17,7 @@ public class Patient {
     private String ethnicity;
     private String contactDetail;
     private String emergencyContact;
+    private String relationship;
     public static String[] confidential = {
         "dob",
         "gender",
@@ -24,6 +25,7 @@ public class Patient {
         "ethnicity",
         "contactDetail",
         "emergencyContact",
+        "relationship"
     };
 
     public Patient(String patientName, String IC, String dob, char gender, String address, String ethnicity, String contactDetail, String emergenyContact) {
@@ -35,6 +37,7 @@ public class Patient {
         this.ethnicity = ethnicity;
         this.contactDetail = contactDetail;
         this.emergencyContact = emergenyContact;
+        this.relationship = relationship;
     }
 
     public String getPatientName() {
@@ -100,9 +103,13 @@ public class Patient {
     public void setEmergenyContact(String emergenyContact) {
         this.emergencyContact = emergenyContact;
     }
+    
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
 
     @Override
     public String toString() {
-        return "Patient{" + "patientName=" + patientName + ", IC=" + IC + ", dob=" + dob + ", gender=" + gender + ", address=" + address + ", ethnicity=" + ethnicity + ", contactDetail=" + contactDetail + ", emergenyContact=" + emergencyContact + '}';
+        return "Patient{" + "patientName=" + patientName + ", IC=" + IC + ", dob=" + dob + ", gender=" + gender + ", address=" + address + ", ethnicity=" + ethnicity + ", contactDetail=" + contactDetail + ", emergenyContact=" + emergencyContact + ", relationship=" + relationship +'}';
     }
 }
