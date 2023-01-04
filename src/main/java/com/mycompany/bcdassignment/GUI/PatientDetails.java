@@ -481,7 +481,7 @@ public class PatientDetails extends javax.swing.JFrame {
     private void btnCreateHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateHRActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new CreateHealthRecord().setVisible(true);
+        new CreateHealthRecord(patientList.get(currentIndex).getUUID(), patientList.get(currentIndex).getPatientName()).setVisible(true);
     }//GEN-LAST:event_btnCreateHRActionPerformed
 
     private void btnViewAppointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppointActionPerformed

@@ -4,6 +4,8 @@
  */
 package com.mycompany.bcdassignment.Entities;
 
+import java.util.List;
+
 /**
  *
  * @author coolzone
@@ -100,6 +102,28 @@ public class HealthRecord {
 
     @Override
     public String toString() {
-        return "HealthRecord{" + "UUID=" + UUID + ", patientUUID=" + patientUUID + ", height=" + height + ", weight=" + weight + ", bloodType=" + bloodType + ", allergies=" + allergies + ", immunization=" + immunization + ", familyHealthHistory=" + familyHealthHistory + '}';
+        return "HealthRecord{" +
+                "UUID='" + UUID + '\'' +
+                ", patientUUID='" + patientUUID + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", bloodType='" + bloodType + '\'' +
+                ", allergies='" + allergies + '\'' +
+                ", immunization='" + immunization + '\'' +
+                ", familyHealthHistory='" + familyHealthHistory + '\'' +
+                '}';
+    }
+
+    public List<String> toList() {
+        return List.of(new String[]{
+                UUID,
+                patientUUID,
+                String.valueOf(height),
+                String.valueOf(weight),
+                bloodType,
+                allergies,
+                immunization,
+                familyHealthHistory
+        });
     }
 }

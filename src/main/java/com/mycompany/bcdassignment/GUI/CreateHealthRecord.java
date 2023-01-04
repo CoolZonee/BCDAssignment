@@ -4,6 +4,13 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Entities.HealthRecord;
+
+import javax.swing.*;
+import java.util.UUID;
+
 /**
  *
  * @author User
@@ -13,8 +20,10 @@ public class CreateHealthRecord extends javax.swing.JFrame {
     /**
      * Creates new form NewHealthRecord
      */
-    public CreateHealthRecord() {
+    public CreateHealthRecord(String patientUUID, String patientName) {
         initComponents();
+        txtName.setText(patientName);
+        txtId.setText(patientUUID);
     }
 
     /**
@@ -262,48 +271,46 @@ public class CreateHealthRecord extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        if (
+                txtName.getText().isEmpty() ||
+                txtId.getText().isEmpty() ||
+                txtHeight.getText().isEmpty() ||
+                txtWeight.getText().isEmpty() ||
+                txtBlood.getText().isEmpty() ||
+                txtAllergies.getText().isEmpty() ||
+                txtImmunization.getText().isEmpty() ||
+                txtFamilyHealthHis.getText().isEmpty()
+        ) {
+            JOptionPane.showMessageDialog(null, "One or more fields are blank.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String healthUUID = UUID.randomUUID().toString();
+            HealthRecord healthRecord = new HealthRecord(
+                healthUUID,
+                txtId.getText(),
+                Double.parseDouble(txtHeight.getText()),
+                Double.parseDouble(txtWeight.getText()),
+                txtBlood.getText(),
+                txtAllergies.getText(),
+                txtImmunization.getText(),
+                txtFamilyHealthHis.getText()
+            );
+
+            Blockchain healthBc = new Blockchain(Constant.HEALTH_RECORD);
+
+            healthBc.addNewBlock(healthRecord.toList());
+
+            JOptionPane.showMessageDialog(null, "Successful inserted a health record!",
+                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+            new PatientDetails().setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_btnResetActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateHealthRecord().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
