@@ -77,7 +77,7 @@ public class CreateAppointment extends javax.swing.JFrame {
             }
         });
 
-        btnSubmit.setFont(new java.awt.Font("Segoe UI", 3, 16)); // NOI18N
+        btnSubmit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -172,6 +172,7 @@ public class CreateAppointment extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

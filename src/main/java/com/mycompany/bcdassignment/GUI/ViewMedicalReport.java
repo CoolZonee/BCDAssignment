@@ -32,7 +32,7 @@ public class ViewMedicalReport extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnVerify = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -59,6 +59,7 @@ public class ViewMedicalReport extends javax.swing.JFrame {
         jTextField12 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        btnDecrypt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,9 +80,9 @@ public class ViewMedicalReport extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Treatment Required:");
 
-        jButton4.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jButton4.setText("Verify");
-        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVerify.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnVerify.setText("Verify");
+        btnVerify.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Medicines:");
@@ -95,15 +96,32 @@ public class ViewMedicalReport extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Lab Test Result:");
 
+        jTextField10.setEditable(false);
+
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
+
+        jTextField1.setEditable(false);
+
+        jTextField2.setEditable(false);
+
+        jTextField3.setEditable(false);
+
+        jTextField4.setEditable(false);
+
+        jTextField5.setEditable(false);
+
+        jTextField6.setEditable(false);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel2.setText("View Medical Report");
         jLabel2.setToolTipText("");
         jLabel2.setAlignmentX(0.5F);
         jLabel2.setMaximumSize(new java.awt.Dimension(500, 50));
+
+        jTextField7.setEditable(false);
 
         btnBack.setBackground(new java.awt.Color(204, 204, 204));
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
@@ -115,6 +133,8 @@ public class ViewMedicalReport extends javax.swing.JFrame {
             }
         });
 
+        jTextField8.setEditable(false);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Appointment ID:");
 
@@ -124,8 +144,14 @@ public class ViewMedicalReport extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Signature Value:");
 
+        jTextField9.setEditable(false);
+
+        jTextField11.setEditable(false);
+
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Validation:");
+
+        jTextField12.setEditable(false);
 
         jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton5.setText("Prev");
@@ -134,6 +160,10 @@ public class ViewMedicalReport extends javax.swing.JFrame {
         jButton6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton6.setText("Next");
         jButton6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnDecrypt.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnDecrypt.setText("Decrypt");
+        btnDecrypt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,6 +175,8 @@ public class ViewMedicalReport extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -189,7 +221,7 @@ public class ViewMedicalReport extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1)
                                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVerify, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(btnBack)
@@ -257,11 +289,12 @@ public class ViewMedicalReport extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnVerify, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 35, Short.MAX_VALUE))
         );
 
@@ -279,6 +312,7 @@ public class ViewMedicalReport extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -327,7 +361,8 @@ public class ViewMedicalReport extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnDecrypt;
+    private javax.swing.JButton btnVerify;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
