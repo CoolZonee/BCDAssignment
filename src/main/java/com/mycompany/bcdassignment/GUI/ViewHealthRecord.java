@@ -6,16 +6,12 @@ package com.mycompany.bcdassignment.GUI;
 
 import com.mycompany.bcdassignment.Blockchain.Block;
 import com.mycompany.bcdassignment.Blockchain.Blockchain;
-import com.mycompany.bcdassignment.Blockchain.TransactionCollection;
 import com.mycompany.bcdassignment.Constant;
 import com.mycompany.bcdassignment.Cryptography.Asymmetric;
-import com.mycompany.bcdassignment.Entities.HealthRecord;
-import com.mycompany.bcdassignment.Entities.Patient;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *
