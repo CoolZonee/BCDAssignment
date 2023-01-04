@@ -18,20 +18,20 @@ public class DigSignature {
     PrivateKey priKey;
     String signatureAlg = "SHA256WithRSA";
 
-    public DigSignature(String pubKey, String prikey) {
-        try{
-            signature = Signature.getInstance(signatureAlg);
-            pubKey = stringToPublicKey(pubKey);
-            prikey = stringToPrivateKey(prikey);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public PublicKey stringToPublicKey(String encodedPubKey) {
-        byte[] decoded = Base64.getDecoder().decode(encodedPubKey);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
-        KeyFactory keyFac = KeyFactory.getInstance("RSA");
-
-    }
+//    public DigSignature(String pubKey, String prikey) {
+//        try{
+//            signature = Signature.getInstance(signatureAlg);
+//            pubKey = stringToPublicKey(pubKey);
+//            prikey = stringToPrivateKey(prikey);
+//        } catch (NoSuchAlgorithmException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public PublicKey stringToPublicKey(String encodedPubKey) {
+//        byte[] decoded = Base64.getDecoder().decode(encodedPubKey);
+//        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
+//        KeyFactory keyFac = KeyFactory.getInstance("RSA");
+//
+//    }
 }

@@ -4,11 +4,19 @@
  */
 package com.mycompany.bcdassignment.Cryptography;
 
+import com.mycompany.bcdassignment.Blockchain.TransactionCollection;
 import com.mycompany.bcdassignment.Constant;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -61,5 +69,42 @@ public class Asymmetric {
         //decrypt
         byte[] dataBytes = cipher.doFinal(cipherBytes);
         return new String(dataBytes);
+    }
+
+    public static String encryptData (String input) {
+        // encrypt the record
+        Path path = Paths.get(Constant.PUBLIC_KEY_PATH);
+        if (Files.exists(path)) {
+            try {
+                KPKeyPair.setPublicKey(Files.readAllBytes(path));
+            } catch (IOException ex) {
+                Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            KPKeyPair.create();
+            KPKeyPair.put(KPKeyPair.getPublicKey().getEncoded(), Constant.PUBLIC_KEY_PATH);
+            KPKeyPair.put(KPKeyPair.getPrivateKey().getEncoded(), Constant.PRIVATE_KEY_PATH);
+        }
+        Asymmetric asym = new Asymmetric();
+        return asym.encrypt(input, KPKeyPair.getPublicKey());
+    }
+
+    public static String decryptData (String input) {
+        try {
+            // decrypt the record
+            Path path = Paths.get(Constant.PRIVATE_KEY_PATH);
+            if (Files.exists(path)) {
+                try {
+                    KPKeyPair.setPrivateKey(Files.readAllBytes(path));
+                } catch (IOException ex) {
+                    Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            Asymmetric asym = new Asymmetric();
+            return asym.decrypt(input, KPKeyPair.getPrivateKey());
+        } catch (Exception ex) {
+            Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 }

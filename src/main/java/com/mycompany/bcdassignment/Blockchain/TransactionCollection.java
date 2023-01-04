@@ -25,6 +25,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static com.mycompany.bcdassignment.Cryptography.Asymmetric.decryptData;
+import static com.mycompany.bcdassignment.Cryptography.Asymmetric.encryptData;
+
 public class TransactionCollection implements Serializable {
 
     @Serial
@@ -48,47 +51,12 @@ public class TransactionCollection implements Serializable {
         tranxList.add(encryptData(record));
     }
 
-    private String encryptData (String input) {
-        // encrypt the record
-        Path path = Paths.get(Constant.PUBLIC_KEY_PATH);
-        if (Files.exists(path)) {
-            try {
-                KPKeyPair.setPublicKey(Files.readAllBytes(path));
-            } catch (IOException ex) {
-                Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            KPKeyPair.create();
-            KPKeyPair.put(KPKeyPair.getPublicKey().getEncoded(), Constant.PUBLIC_KEY_PATH);
-            KPKeyPair.put(KPKeyPair.getPrivateKey().getEncoded(), Constant.PRIVATE_KEY_PATH);
-        }
-        Asymmetric asym = new Asymmetric();
-        return asym.encrypt(input, KPKeyPair.getPublicKey());
-    }
+
     
-    private String decryptData (String input) {
-        try {
-            // decrypt the record
-            Path path = Paths.get(Constant.PRIVATE_KEY_PATH);
-            if (Files.exists(path)) {
-                try {
-                    KPKeyPair.setPrivateKey(Files.readAllBytes(path));
-                } catch (IOException ex) {
-                    Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            Asymmetric asym = new Asymmetric();
-            return asym.decrypt(input, KPKeyPair.getPrivateKey());
-        } catch (Exception ex) {
-            Logger.getLogger(TransactionCollection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
-    }
-    
-    public List<String> getDecryptedData () {
+    public List<String> getDecryptedData() {
         return tranxList
                 .stream()
-                .map(this::decryptData)
+                .map(Asymmetric::decryptData)
                 .collect(Collectors.toList());
     }
 

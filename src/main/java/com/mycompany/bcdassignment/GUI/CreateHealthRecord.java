@@ -4,11 +4,13 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Block;
 import com.mycompany.bcdassignment.Blockchain.Blockchain;
 import com.mycompany.bcdassignment.Constant;
 import com.mycompany.bcdassignment.Entities.HealthRecord;
 
 import javax.swing.*;
+import java.util.LinkedList;
 import java.util.UUID;
 
 /**

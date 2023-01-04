@@ -142,10 +142,6 @@ public class InsertPatient extends javax.swing.JFrame {
                 btnSubmitActionPerformed(evt);
             }
         });
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setText("Relationship:");
-
-        cmbRelationship.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Father", "Mother", "Guardian", "Siblings", "Relatives" }));
 
         cmbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
 

@@ -9,6 +9,7 @@ import com.mycompany.bcdassignment.Blockchain.Blockchain;
 import com.mycompany.bcdassignment.Constant;
 import com.mycompany.bcdassignment.Entities.Patient;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -471,8 +472,25 @@ public class PatientDetails extends javax.swing.JFrame {
 
     private void btnCreateHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateHRActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new CreateHealthRecord(patientList.get(currentIndex).getUUID(), patientList.get(currentIndex).getPatientName()).setVisible(true);
+        Blockchain bc = new Blockchain(Constant.HEALTH_RECORD);
+        LinkedList<Block> list = bc.get();
+        if (list != null && list.size() >= 2) {
+            var l = list.stream()
+                    .filter(e -> e.tranxRecord != null)
+                    .map(e -> e.tranxRecord.tranxList)
+                    .filter(e -> e
+                            .get(1)
+                            .equals(patientList.get(currentIndex).getUUID())
+                    )
+                    .toList();
+            if (l.size() > 0) {
+                JOptionPane.showMessageDialog(this, "Health record for this patient has already existed!",
+                        "Existed", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                this.setVisible(false);
+                new CreateHealthRecord(patientList.get(currentIndex).getUUID(), patientList.get(currentIndex).getPatientName()).setVisible(true);
+            }
+        }
     }//GEN-LAST:event_btnCreateHRActionPerformed
 
     private void btnViewAppointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppointActionPerformed
@@ -505,40 +523,9 @@ public class PatientDetails extends javax.swing.JFrame {
         new InsertPatient().setVisible(true);
     }//GEN-LAST:event_btnNext1ActionPerformed
 
-<<<<<<< Updated upstream
-    private void txtRelationshipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRelationshipActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRelationshipActionPerformed
-
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {
         if (currentIndex > 0) {
             currentIndex -= 1;
-=======
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PatientDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
->>>>>>> Stashed changes
         }
         setDetails();
     }
@@ -552,6 +539,7 @@ public class PatientDetails extends javax.swing.JFrame {
 
     private void setDetails () {
         txtName.setText(patientList.get(currentIndex).getPatientName());
+        txtId.setText(patientList.get(currentIndex).getUUID());
         txtIc.setText(patientList.get(currentIndex).getIC());
         txtDob.setText(patientList.get(currentIndex).getDob());
         txtGender.setText(String.valueOf(patientList.get(currentIndex).getGender()));

@@ -33,7 +33,7 @@ public class StaffDetails extends javax.swing.JFrame {
             listSize = list.size() - 1;
             list.forEach(e -> {
                 if (e.tranxRecord != null) {
-                    List<String> user = e.tranxRecord.getDecryptedData();
+                    List<String> user = e.tranxRecord.tranxList;
                     userList.add(new User(
                             user.get(0),
                             user.get(1),
@@ -127,9 +127,12 @@ public class StaffDetails extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Previous");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) { jButton2ActionPerformed(evt); }
+        btnPrev.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnPrev.setText("Previous");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
         });
 
         btnBack.setBackground(new java.awt.Color(204, 204, 204));
@@ -336,21 +339,22 @@ public class StaffDetails extends javax.swing.JFrame {
                 mp.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
-        if (currentIndex < listSize - 1) {
-            currentIndex += 1;
-        }
-        setDetails();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
         if (currentIndex > 0) {
             currentIndex -= 1;
         }
         setDetails();
-    }
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+        if (currentIndex < listSize - 1) {
+            currentIndex += 1;
+        }
+        setDetails();
+    }                                        
+    
     /**
      * @param args the command line arguments
      */
@@ -390,12 +394,12 @@ public class StaffDetails extends javax.swing.JFrame {
     }
 
     private void setDetails () {
-        jTextField1.setText(userList.get(currentIndex).getUUID());
-        jTextField2.setText(userList.get(currentIndex).getName());
-        jTextField3.setText(String.valueOf(userList.get(currentIndex).getGender()));
-        jTextField4.setText(userList.get(currentIndex).getEmail());
-        jTextField5.setText(userList.get(currentIndex).getContactNumber());
-        jTextField6.setText(userList.get(currentIndex).getRole());
+        txtIndex.setText(userList.get(currentIndex).getUUID());
+        txtName.setText(userList.get(currentIndex).getName());
+        txtGender.setText(String.valueOf(userList.get(currentIndex).getGender()));
+        txtEmail.setText(userList.get(currentIndex).getEmail());
+        txtPhoneNo.setText(userList.get(currentIndex).getContactNumber());
+        txtRole.setText(userList.get(currentIndex).getRole());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

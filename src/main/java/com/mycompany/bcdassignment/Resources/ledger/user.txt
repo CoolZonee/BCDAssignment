@@ -28,5 +28,26 @@
         "5e755dfcf84666adeedd2210b980296043ef77f4232f9ad5496523d4cc4f54a3"
       ]
     }
+  },
+  {
+    "header": {
+      "index": 2,
+      "currHash": "c32ed9f833e9eabcdc1dc428e7ee283ecc9d30315298c1f05bb04e3ac0db5d94",
+      "prevHash": "f944191305706a9bfcfafdf2ab05afd15a504bfd1989648dddba72d18944121a",
+      "timestamp": 1672856586378,
+      "merkleRoot": "b09604c56052e32bddfd561f92094bde4a1413e06c2c23d79318739a6e539176"
+    },
+    "tranxRecord": {
+      "tranxList": [
+        "2e565e4c-c2af-43c6-9d01-e0587ab85c55",
+        "chuwei",
+        "M",
+        "chuwei@mail.com",
+        "0123344566",
+        "Doctor",
+        "chuwei",
+        "c82d494a0a1cb8549d8c937816919aef9fede36b64388439a28b26446a8dc1a8"
+      ]
+    }
   }
 ]

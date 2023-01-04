@@ -278,7 +278,7 @@ public class RegisterNewStaff extends javax.swing.JFrame {
             if (list != null && list.size() >= 2) {
                 var l = list.stream()
                         .filter(e -> e.tranxRecord != null)
-                        .map(e -> e.tranxRecord.getDecryptedData())
+                        .map(e -> e.tranxRecord.tranxList)
                         .filter(e -> e.get(e.size() - 2).equals(txtUsername.getText())).toList();
                 if (l.size() > 0) {
                     JOptionPane.showMessageDialog(null, "Username existed!",

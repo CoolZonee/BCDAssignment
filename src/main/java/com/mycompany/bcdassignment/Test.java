@@ -17,19 +17,19 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-        Blockchain bc = new Blockchain(Constant.PATIENT_RECORD);
-        LinkedList<Block> list = bc.get();
-        List<Patient> patientList = new ArrayList<>();
-        System.out.println(list.size());
-        list.forEach(e -> {
-            if(e.tranxRecord != null) {
-                e.tranxRecord.getDecryptedData().get(0);
-            }
-        });
-
-        patientList.forEach(e -> {
-            System.out.println(e);
-        });
+//        Blockchain bc = new Blockchain(Constant.PATIENT_RECORD);
+//        LinkedList<Block> list = bc.get();
+//        List<Patient> patientList = new ArrayList<>();
+//        System.out.println(list.size());
+//        list.forEach(e -> {
+//            if(e.tranxRecord != null) {
+//                e.tranxRecord.getDecryptedData().get(0);
+//            }
+//        });
+//
+//        patientList.forEach(e -> {
+//            System.out.println(e);
+//        });
 
     }
 }

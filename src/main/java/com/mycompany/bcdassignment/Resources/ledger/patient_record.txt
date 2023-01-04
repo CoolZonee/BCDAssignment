@@ -28,5 +28,26 @@
         "0182325423"
       ]
     }
+  },
+  {
+    "header": {
+      "index": 2,
+      "currHash": "0c0ae75235ab964bc58267ce5f6ccaab7219637daf2ad7dea68b686ba177218d",
+      "prevHash": "83a4484281182943635c29b6b08e0b661e6b6d715cb916cf4419a1db9d09e67d",
+      "timestamp": 1672856397122,
+      "merkleRoot": "6ccff127c42ec117950ff254f1173f1c8dd11aed693bcc27013fe781a2c2ba78"
+    },
+    "tranxRecord": {
+      "tranxList": [
+        "d1e965e1-e1b8-4af7-bdd7-79153f4c53af",
+        "Test",
+        "12312312312",
+        "12/12/2001",
+        "F",
+        "testing address",
+        "Malay",
+        "0123354345"
+      ]
+    }
   }
 ]

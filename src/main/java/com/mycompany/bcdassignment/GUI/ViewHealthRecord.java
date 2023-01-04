@@ -6,10 +6,13 @@ package com.mycompany.bcdassignment.GUI;
 
 import com.mycompany.bcdassignment.Blockchain.Block;
 import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Blockchain.TransactionCollection;
 import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Cryptography.Asymmetric;
 import com.mycompany.bcdassignment.Entities.HealthRecord;
 import com.mycompany.bcdassignment.Entities.Patient;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +26,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
     /**
      * Creates new form ViewHealthRecord
      */
+    List<String> healthRc = new ArrayList<>();
     public ViewHealthRecord(String patientUUID, String patientName) {
         initComponents();
         Blockchain bc = new Blockchain(Constant.HEALTH_RECORD);
@@ -37,7 +41,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
                     )
                     .toList();
             if (l.size() == 1) {
-                List<String> healthRc = l.get(0);
+                healthRc = l.get(0);
 
                 jTextField1.setText(patientName);
                 jTextField7.setText(healthRc.get(1));
@@ -83,7 +87,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnDecrypt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -153,9 +157,14 @@ public class ViewHealthRecord extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("kg");
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton3.setText("Decrypt");
-        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnDecrypt.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnDecrypt.setText("Decrypt");
+        btnDecrypt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnDecrypt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDecryptActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,7 +178,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(264, 264, 264)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +252,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
         );
 
@@ -264,9 +273,22 @@ public class ViewHealthRecord extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-                this.setVisible(false);
-                new PatientDetails().setVisible(true);
+        this.setVisible(false);
+        new PatientDetails().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecryptActionPerformed
+        // TODO add your handling code here:
+        if (!healthRc.isEmpty()) {
+            jTextField8.setText(Asymmetric.decryptData(healthRc.get(2)));
+            jTextField9.setText(Asymmetric.decryptData(healthRc.get(3)));
+            jTextField2.setText(Asymmetric.decryptData(healthRc.get(4)));
+            jTextField3.setText(Asymmetric.decryptData(healthRc.get(5)));
+            jTextField4.setText(Asymmetric.decryptData(healthRc.get(6)));
+            jTextField5.setText(Asymmetric.decryptData(healthRc.get(7)));
+            btnDecrypt.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnDecryptActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,7 +296,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnDecrypt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
