@@ -31,23 +31,25 @@ public class PatientDetails extends javax.swing.JFrame {
         Blockchain bc = new Blockchain(Constant.PATIENT_RECORD);
         LinkedList<Block> list = bc.get();
         // -1 because of genesis block
-        listSize = list.size() - 1;
-        list.forEach(e -> {
-            if(e.tranxRecord != null) {
-                List<String> user = e.tranxRecord.getDecryptedData();
-                patientList.add(new Patient(
-                    user.get(0),
-                    user.get(1),
-                    user.get(2),
-                    user.get(3),
-                    user.get(4).charAt(0),
-                    user.get(5),
-                    user.get(6),
-                    user.get(7)
-                ));
-            }
-        });
-        setDetails();
+        if (list.size() >= 2) {
+            listSize = list.size() - 1;
+            list.forEach(e -> {
+                if (e.tranxRecord != null) {
+                    List<String> user = e.tranxRecord.getDecryptedData();
+                    patientList.add(new Patient(
+                            user.get(0),
+                            user.get(1),
+                            user.get(2),
+                            user.get(3),
+                            user.get(4).charAt(0),
+                            user.get(5),
+                            user.get(6),
+                            user.get(7)
+                    ));
+                }
+            });
+            setDetails();
+        }
     }
 
     /**
@@ -473,7 +475,7 @@ public class PatientDetails extends javax.swing.JFrame {
     private void btnViewHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewHRActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewHealthRecord().setVisible(true);
+        new ViewHealthRecord(patientList.get(currentIndex).getUUID(), patientList.get(currentIndex).getPatientName()).setVisible(true);
     }//GEN-LAST:event_btnViewHRActionPerformed
 
     private void btnCreateHRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateHRActionPerformed
@@ -538,6 +540,14 @@ public class PatientDetails extends javax.swing.JFrame {
         txtAddr.setText(patientList.get(currentIndex).getAddress());
         txtEthnicity.setText(patientList.get(currentIndex).getEthnicity());
         txtContact.setText(patientList.get(currentIndex).getContactDetail());
+    }
+
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PatientDetails().setVisible(true);
+            }
+        });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

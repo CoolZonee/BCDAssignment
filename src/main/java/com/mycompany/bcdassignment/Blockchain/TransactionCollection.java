@@ -88,6 +88,5 @@ public class TransactionCollection implements Serializable {
                 "records=" + tranxList +
                 '}';
     }
-
 }
 

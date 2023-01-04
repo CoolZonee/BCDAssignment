@@ -10,7 +10,6 @@ package com.mycompany.bcdassignment.Entities;
  */
 public class HealthRecord {
     private String UUID;
-
     private String patientUUID;
     private double height;
     private double weight;

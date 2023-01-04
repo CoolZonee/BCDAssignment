@@ -4,6 +4,16 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Block;
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Entities.HealthRecord;
+import com.mycompany.bcdassignment.Entities.Patient;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  *
  * @author User
@@ -13,8 +23,44 @@ public class ViewHealthRecord extends javax.swing.JFrame {
     /**
      * Creates new form ViewHealthRecord
      */
-    public ViewHealthRecord() {
+    public ViewHealthRecord(String patientUUID, String patientName) {
         initComponents();
+        Blockchain bc = new Blockchain(Constant.HEALTH_RECORD);
+        LinkedList<Block> list = bc.get();
+        if (list.size() >= 2) {
+            var l = list.stream()
+                    .filter(e -> e.tranxRecord != null)
+                    .map(e -> e.tranxRecord.getDecryptedData())
+                    .filter(e -> e
+                            .get(1)
+                            .equals(patientUUID)
+                    )
+                    .toList();
+            if (l.size() == 1) {
+                List<String> healthRc = l.get(0);
+                HealthRecord hr = new HealthRecord(
+                        healthRc.get(0),
+                        healthRc.get(1),
+                        Double.parseDouble(healthRc.get(2)),
+                        Double.parseDouble(healthRc.get(3)),
+                        healthRc.get(4),
+                        healthRc.get(5),
+                        healthRc.get(6),
+                        healthRc.get(7)
+                );
+
+                jTextField1.setText(patientName);
+                jTextField7.setText(hr.getPatientUUID());
+                jTextField8.setText(String.valueOf(hr.getHeight()));
+                jTextField9.setText(String.valueOf(hr.getWeight()));
+
+                jTextField2.setText(hr.getBloodType());
+                jTextField3.setText(hr.getAllergies());
+                jTextField4.setText(hr.getImmunization());
+                jTextField5.setText(hr.getFamilyHealthHistory());
+            }
+
+        }
     }
 
     /**
@@ -260,37 +306,6 @@ public class ViewHealthRecord extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewHealthRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewHealthRecord().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
