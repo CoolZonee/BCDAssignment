@@ -4,11 +4,10 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
-import com.mycompany.bcdassignment.Entities.Staff;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import com.mycompany.bcdassignment.Hashing.Hasher;
+import com.mycompany.bcdassignment.UserController;
+
+import javax.swing.*;
 
 /**
  *
@@ -171,73 +170,23 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        MenuPage mp = new MenuPage();
-        this.setVisible(false);
-        mp.setVisible(true);
-        
-        //login
-//        String username = txtUsername.getText();
-//        String password = txtPassword.getText();
-//        int updateStatus = 0;
-//        
-//        boolean isAdmin = Staff.login();
-//        
-//        if(isAdmin == true) {
-//            JOptionPane.showMessageDialog(null, "Hello " + txtUsername.getText() + ", welcome back",
-//                    "Login successful", JOptionPane.INFORMATION_MESSAGE);
-//            try {
-//                updateStatus = admin.updateUserType();
-//            } catch (IOException ex) {
-//                Logger.getLogger(AdminLogin.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            if(updateStatus == 0) {
-//                JOptionPane.showMessageDialog(null, "Failed to update user type",
-//                        "User unidentified", JOptionPane.ERROR_MESSAGE);
-//            }
-//            this.setVisible(false);
-//            Staff staff = new Staff();
-//            am.setVisible(true);
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Incoorect username / password / employee ID combination",
-//                    "Invalid credentials", JOptionPane.ERROR_MESSAGE);
-//        }
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        UserController uc = UserController.getInstance();
+        if (uc.getUserList()
+                .stream()
+                .anyMatch(e -> e.getUsername().equals(username) && e.getPassword().equals(Hasher.sha256(password))))
+        {
+            this.setVisible(false);
+            new MenuPage().setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Incorrect username or password",
+                    "Invalid credentials", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginPage().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
