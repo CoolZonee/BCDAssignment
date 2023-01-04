@@ -4,7 +4,10 @@
  */
 package com.mycompany.bcdassignment.DigSignature;
 
+import com.mycompany.bcdassignment.Constant;
+
 import java.security.*;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
@@ -32,7 +35,7 @@ public class DigSignature {
         try {
             byte[] decoded = Base64.getDecoder().decode(encodedPubKey);
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
-            KeyFactory keyFac = KeyFactory.getInstance("RSA");
+            KeyFactory keyFac = KeyFactory.getInstance(Constant.CIPHER_ALG);
             return keyFac.generatePublic(keySpec);
         } catch(Exception e) {
             e.printStackTrace();
@@ -43,8 +46,8 @@ public class DigSignature {
     public PrivateKey stringToPrivateKey(String encodedPriKey) {
         try {
             byte[] decoded = Base64.getDecoder().decode(encodedPriKey);
-            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decoded);
-            KeyFactory keyFac = KeyFactory.getInstance("RSA");
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decoded);
+            KeyFactory keyFac = KeyFactory.getInstance(Constant.CIPHER_ALG);
             return keyFac.generatePrivate(keySpec);
         } catch(Exception e) {
             e.printStackTrace();
