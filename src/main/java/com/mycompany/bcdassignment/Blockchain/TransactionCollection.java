@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,10 +29,19 @@ public class TransactionCollection implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 3526685098573657690L;
-    public List<String> tranxList;
+    public List<String> tranxList = new ArrayList<>();
 
-    public TransactionCollection(List<String> tranxList) {
-        this.tranxList = tranxList.stream().map(this::encryptData).toList();
+    public TransactionCollection(List<String> tranxList, Integer[] confidential) {
+        for (int i = 0; i < tranxList.size(); i++) {
+            final int current = i;
+            String value;
+            if (Arrays.stream(confidential).anyMatch(e -> e == current)) {
+                value = encryptData(tranxList.get(i));
+            } else {
+                value = tranxList.get(i);
+            }
+            this.tranxList.add(value);
+        }
     }
 
     public void add (String record) {

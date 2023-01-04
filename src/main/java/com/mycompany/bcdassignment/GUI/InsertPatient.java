@@ -340,12 +340,12 @@ public class InsertPatient extends javax.swing.JFrame {
 
             Blockchain healthBc = new Blockchain(Constant.PATIENT_RECORD);
 
-            healthBc.addNewBlock(patient.toList());
-
-            JOptionPane.showMessageDialog(null, "Successful inserted a new patient!",
-                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+            healthBc.addNewBlock(patient.toList(), Patient.confidential);
             new PatientDetails().setVisible(true);
             this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Successful inserted a new patient!",
+                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+
         }
 
     }

@@ -298,12 +298,12 @@ public class CreateHealthRecord extends javax.swing.JFrame {
 
             Blockchain healthBc = new Blockchain(Constant.HEALTH_RECORD);
 
-            healthBc.addNewBlock(healthRecord.toList());
-
-            JOptionPane.showMessageDialog(null, "Successful inserted a health record!",
-                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+            healthBc.addNewBlock(healthRecord.toList(), HealthRecord.confidential);
             new PatientDetails().setVisible(true);
             this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Successful inserted a health record!",
+                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 

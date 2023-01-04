@@ -30,7 +30,7 @@ public class ViewHealthRecord extends javax.swing.JFrame {
         if (list != null && list.size() >= 2) {
             var l = list.stream()
                     .filter(e -> e.tranxRecord != null)
-                    .map(e -> e.tranxRecord.getDecryptedData())
+                    .map(e -> e.tranxRecord.tranxList)
                     .filter(e -> e
                             .get(1)
                             .equals(patientUUID)
@@ -38,26 +38,16 @@ public class ViewHealthRecord extends javax.swing.JFrame {
                     .toList();
             if (l.size() == 1) {
                 List<String> healthRc = l.get(0);
-                HealthRecord hr = new HealthRecord(
-                        healthRc.get(0),
-                        healthRc.get(1),
-                        Double.parseDouble(healthRc.get(2)),
-                        Double.parseDouble(healthRc.get(3)),
-                        healthRc.get(4),
-                        healthRc.get(5),
-                        healthRc.get(6),
-                        healthRc.get(7)
-                );
 
                 jTextField1.setText(patientName);
-                jTextField7.setText(hr.getPatientUUID());
-                jTextField8.setText(String.valueOf(hr.getHeight()));
-                jTextField9.setText(String.valueOf(hr.getWeight()));
+                jTextField7.setText(healthRc.get(1));
+                jTextField8.setText(healthRc.get(2));
+                jTextField9.setText(healthRc.get(3));
 
-                jTextField2.setText(hr.getBloodType());
-                jTextField3.setText(hr.getAllergies());
-                jTextField4.setText(hr.getImmunization());
-                jTextField5.setText(hr.getFamilyHealthHistory());
+                jTextField2.setText(healthRc.get(4));
+                jTextField3.setText(healthRc.get(5));
+                jTextField4.setText(healthRc.get(6));
+                jTextField5.setText(healthRc.get(7));
             }
 
         }

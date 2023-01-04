@@ -7,7 +7,6 @@ package com.mycompany.bcdassignment.GUI;
 import com.mycompany.bcdassignment.Blockchain.Block;
 import com.mycompany.bcdassignment.Blockchain.Blockchain;
 import com.mycompany.bcdassignment.Constant;
-import com.mycompany.bcdassignment.Entities.Patient;
 import com.mycompany.bcdassignment.Entities.User;
 
 import java.util.ArrayList;
@@ -19,10 +18,6 @@ import java.util.List;
  * @author User
  */
 public class StaffDetails extends javax.swing.JFrame {
-
-    /**
-     * Creates new form NewJFrame
-     */
 
     int listSize = 0;
 

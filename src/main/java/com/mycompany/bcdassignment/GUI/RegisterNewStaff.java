@@ -300,12 +300,12 @@ public class RegisterNewStaff extends javax.swing.JFrame {
             );
 
 
-            userBc.addNewBlock(user.toList());
-
-            JOptionPane.showMessageDialog(null, "Successful register a new staff!",
-                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+            userBc.addNewBlock(user.toList(), User.confidential);
             this.setVisible(false);
             new LoginPage().setVisible(true);
+            JOptionPane.showMessageDialog(null, "Successful register a new staff!",
+                    "Successful", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 

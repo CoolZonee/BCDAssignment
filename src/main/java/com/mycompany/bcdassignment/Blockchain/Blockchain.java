@@ -53,7 +53,7 @@ public class Blockchain {
         persist();
     }
 
-    public void addNewBlock(List<String> arr) {
+    public void addNewBlock(List<String> arr, Integer[] confidential) {
         if (!(new File(MASTER_BINARY_DIR).exists())) {
             new File(MASTER_BINARY_DIR).mkdir();
             new File(MASTER_LEDGER_DIR).mkdir();
@@ -63,7 +63,7 @@ public class Blockchain {
             genesis();
         }
 
-        TransactionCollection tranxs = new TransactionCollection(arr);
+        TransactionCollection tranxs = new TransactionCollection(arr, confidential);
         MerkleTree mt = new MerkleTree(arr);
         mt.build();
 

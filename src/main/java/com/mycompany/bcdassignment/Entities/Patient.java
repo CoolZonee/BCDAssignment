@@ -17,14 +17,7 @@ public class Patient {
     private String ethnicity;
     private String contactDetail;
 
-    public static Integer[] confidential = {
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-    };
+    public static Integer[] confidential = {};
 
     public Patient(String UUID, String patientName, String IC, String dob, char gender, String address, String ethnicity, String contactDetail) {
         this.UUID = UUID;

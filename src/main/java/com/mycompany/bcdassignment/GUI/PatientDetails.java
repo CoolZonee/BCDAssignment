@@ -35,7 +35,7 @@ public class PatientDetails extends javax.swing.JFrame {
             listSize = list.size() - 1;
             list.forEach(e -> {
                 if (e.tranxRecord != null) {
-                    List<String> user = e.tranxRecord.getDecryptedData();
+                    List<String> user = e.tranxRecord.tranxList;
                     patientList.add(new Patient(
                             user.get(0),
                             user.get(1),

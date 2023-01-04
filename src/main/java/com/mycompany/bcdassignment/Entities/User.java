@@ -19,6 +19,7 @@ public class User {
     private String role;
     private String username;
     private String password;
+    public static Integer[] confidential = {};
 
     public User(String UUID, String name, char gender, String email, String contactNumber, String role, String username, String password) {
         this.UUID = UUID;

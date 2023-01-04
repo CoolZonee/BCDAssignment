@@ -184,7 +184,7 @@ public class LoginPage extends javax.swing.JFrame {
         if (list != null && list.size() >= 2) {
             var l = list.stream()
                     .filter(e -> e.tranxRecord != null)
-                    .map(e -> e.tranxRecord.getDecryptedData())
+                    .map(e -> e.tranxRecord.tranxList)
                     .filter(e -> e.get(e.size() - 2).equals(username)
                             && e.get(e.size() - 1).equals(Hasher.sha256(password))).toList();
 

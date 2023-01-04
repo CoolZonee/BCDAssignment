@@ -36,6 +36,6 @@ public class BCDAssignment {
         Blockchain healthBc = new Blockchain(HEALTH_RECORD);
 
 //        patientBc.addNewBlock(Arrays.asList(patient));
-        healthBc.addNewBlock(Arrays.asList(health));
+//        healthBc.addNewBlock(Arrays.asList(health));
     }
 }
