@@ -4,6 +4,16 @@
  */
 package com.mycompany.bcdassignment.GUI;
 
+import com.mycompany.bcdassignment.Blockchain.Block;
+import com.mycompany.bcdassignment.Blockchain.Blockchain;
+import com.mycompany.bcdassignment.Constant;
+import com.mycompany.bcdassignment.Entities.Patient;
+import com.mycompany.bcdassignment.Entities.User;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author User
@@ -13,8 +23,36 @@ public class StaffDetails extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+
+    int listSize = 0;
+
+    int currentIndex = 0;
+
+    List<User> userList = new ArrayList<>();
     public StaffDetails() {
         initComponents();
+        Blockchain bc = new Blockchain(Constant.USER);
+        LinkedList<Block> list = bc.get();
+        // -1 because of genesis block
+        if (list != null && list.size() >= 2) {
+            listSize = list.size() - 1;
+            list.forEach(e -> {
+                if (e.tranxRecord != null) {
+                    List<String> user = e.tranxRecord.getDecryptedData();
+                    userList.add(new User(
+                            user.get(0),
+                            user.get(1),
+                            user.get(2).charAt(0),
+                            user.get(3),
+                            user.get(4),
+                            user.get(5),
+                            user.get(6),
+                            user.get(7)
+                    ));
+                }
+            });
+        }
+        setDetails();
     }
 
     /**
@@ -94,6 +132,9 @@ public class StaffDetails extends javax.swing.JFrame {
         });
 
         jButton2.setText("Previous");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) { jButton2ActionPerformed(evt); }
+        });
 
         btnBack.setBackground(new java.awt.Color(204, 204, 204));
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 60)); // NOI18N
@@ -291,8 +332,19 @@ public class StaffDetails extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (currentIndex < listSize - 1) {
+            currentIndex += 1;
+        }
+        setDetails();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (currentIndex > 0) {
+            currentIndex -= 1;
+        }
+        setDetails();
+    }
     /**
      * @param args the command line arguments
      */
@@ -329,6 +381,15 @@ public class StaffDetails extends javax.swing.JFrame {
                 new StaffDetails().setVisible(true);
             }
         });
+    }
+
+    private void setDetails () {
+        jTextField1.setText(userList.get(currentIndex).getUUID());
+        jTextField2.setText(userList.get(currentIndex).getName());
+        jTextField3.setText(String.valueOf(userList.get(currentIndex).getGender()));
+        jTextField4.setText(userList.get(currentIndex).getEmail());
+        jTextField5.setText(userList.get(currentIndex).getContactNumber());
+        jTextField6.setText(userList.get(currentIndex).getRole());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
