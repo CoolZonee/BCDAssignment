@@ -21,22 +21,25 @@ public class Block implements Serializable {
     @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     public Header header;
-
-    public Header getHeader() {
-        return header;
-    }
+    public TransactionCollection tranxRecord;
 
     public Block (String previousHash, String merkleRoot) {
         header = new Header();
         header.setPrevHash(previousHash);
         header.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
         header.setMerkleRoot(merkleRoot);
-        String info = String.join("+", Integer.toString(header.getIndex()), Long.toString(header.getTimestamp()), header.getPrevHash());
+        String info = String.join("+",
+                Integer.toString(header.getIndex()),
+                Long.toString(header.getTimestamp()),
+                header.getPrevHash(),
+                merkleRoot);
         String blockHash = Hasher.sha256(info);
         header.setCurrHash(blockHash);
     }
 
-    public TransactionCollection tranxRecord;
+    public Header getHeader() {
+        return header;
+    }
 
     public void setTranxRecord(TransactionCollection tranxRecord) {
         this.tranxRecord = tranxRecord;
@@ -44,21 +47,10 @@ public class Block implements Serializable {
     
     @Override
     public String toString() {
-        return "Block [body=" + tranxRecord + ", header=" + header + "]";
-    }
-
-    private byte[] getBytes() {
-        try (
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream out = new ObjectOutputStream(baos);
-        ) {
-            out.writeObject(this);
-            return baos.toByteArray();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return "Block [body=" +
+                tranxRecord +
+                ", header=" +
+                header + "]";
     }
 
     public static class Header implements Serializable {

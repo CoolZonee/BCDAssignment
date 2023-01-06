@@ -23,6 +23,7 @@ public class Constant {
     
     public static final String CIPHER_ALG = "RSA";
     public static final String SALT = "H=3?xk+HseFQ";
+    public static final String HASHING_ALG = "SHA-256";
 
     public static final String DOCTOR = "Doctor";
     public static final String STAFF = "Staff";

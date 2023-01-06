@@ -14,7 +14,7 @@ import org.apache.commons.codec.binary.Hex;
  */
 public class Hasher {
     public static String sha256(String input) {
-        return hash(input, "SHA-256");
+        return hash(input, Constant.HASHING_ALG);
     }
     
     private static String hash(String input, String algo) {
@@ -25,17 +25,13 @@ public class Hasher {
         try {
             // instantiate md based on the algorithm
             md = MessageDigest.getInstance(algo);
-
             // adding security value using salt
             byte[] salt = Constant.SALT.getBytes();
             md.update(salt);
-
             // fetch input to md
             md.update(input.getBytes());
-
             // digest it into array of bytes
             byte[] hashBytes = md.digest();
-       
             // byte[] to hex
             return Hex.encodeHexString(hashBytes);
         }

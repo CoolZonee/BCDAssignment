@@ -13,31 +13,19 @@ import com.mycompany.bcdassignment.Hashing.Hasher;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author kimlee
- * * @implNote
- * To generate merkle root based on the given transaction-list. */
 public class MerkleTree {
     private List<String> tranxLst;
     private String root = "0";
-    public String getRoot() {
-        return root;
-    }
-    /**
-     * @implNote
-     * Set the transaction list to the MerkleTree object.
-     @param tranxLst
-     */
+
     public MerkleTree(List<String> tranxLst) {
         super();
         this.tranxLst = tranxLst;
     }
-    /**
-     * @implNote
-     * Build merkle tree
-     * @implSpec
-     * + build() : void
-     */
+
+    public String getRoot() {
+        return root;
+    }
+
     public void build() {
         List<String> tempLst = new ArrayList<>(this.tranxLst);
         List<String> hashes = genTranxHashLst( tempLst );
@@ -46,12 +34,7 @@ public class MerkleTree {
         }
         this.root = hashes.get(0);
     }
-    /**
-     * @implNote
-     * Generate hashes of transactions
-     * @implSpec
-     * - genTranxHashLst(List<String>) : List<String>
-     */
+
     private List<String> genTranxHashLst(List<String> tranxLst) {
         List<String> hashLst = new ArrayList<>();
         int i = 0;

@@ -51,15 +51,6 @@ public class TransactionCollection implements Serializable {
         tranxList.add(encryptData(record));
     }
 
-
-    
-    public List<String> getDecryptedData() {
-        return tranxList
-                .stream()
-                .map(Asymmetric::decryptData)
-                .collect(Collectors.toList());
-    }
-
     @Override
     public String toString() {
         return "TransactionRecords {" +

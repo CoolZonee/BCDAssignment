@@ -29,9 +29,7 @@ public class Blockchain {
         this.chainFileName = Constant.MASTER_BINARY_DIR + "/" + moduleName + ".bin";
         this.ledgerFileName = Constant.MASTER_LEDGER_DIR + "/" + moduleName + ".txt";
     }
-    /**
-     * genesis()
-     */
+
     public void genesis() {
         Block genesis = new Block("0", "");
         chain.add(genesis);
@@ -41,9 +39,6 @@ public class Blockchain {
         distribute();
     }
 
-    /**
-     * nextBlock()
-     */
     public void nextBlock(Block newBlock) {
         // obtain existing blockchain binary
         chain = get();
@@ -75,9 +70,7 @@ public class Blockchain {
         nextBlock(newBlock);
         distribute();
     }
-    /**
-     * get()
-     */
+
     public LinkedList<Block> get() {
         try (
                 FileInputStream fis = new FileInputStream(this.chainFileName);
@@ -91,9 +84,6 @@ public class Blockchain {
         }
     }
 
-    /**
-     * persist()
-     */
     private void persist() {
         try (
                 FileOutputStream fos = new FileOutputStream(this.chainFileName);
@@ -107,9 +97,6 @@ public class Blockchain {
         }
     }
 
-    /**
-     * distribute() - display the ledger file
-     */
     public void distribute() {
         // convert the chain to String using gson api
         try {

@@ -29,14 +29,6 @@ public class KPKeyPair {
     public static PublicKey publicKey;
     public static PrivateKey privateKey;
 
-    public static PublicKey getPublicKey() {
-        return publicKey;
-    }
-
-    public static PrivateKey getPrivateKey() {
-        return privateKey;
-    }
-
     public KPKeyPair() {
         try {
             keygen = KeyPairGenerator.getInstance(Constant.CIPHER_ALG);
@@ -45,6 +37,14 @@ public class KPKeyPair {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static PublicKey getPublicKey() {
+        return publicKey;
+    }
+
+    public static PrivateKey getPrivateKey() {
+        return privateKey;
     }
 
     public static void create() {
